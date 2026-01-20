@@ -21,6 +21,31 @@ const App = () => {
   const filters = useSelector(selectFilters);
   const favorites = useSelector(selectFavorites);
 
+  const equipmentFilters = [
+    "AC",
+    "bathroom",
+    "kitchen",
+    "TV",
+    "radio",
+    "refrigerator",
+    "microwave",
+    "gas",
+    "water",
+  ];
+
+  // Варіанти для типу кузова (form)
+  const formOptions = [
+    { label: "All types", value: "" },
+    { label: "Van (Panel Truck)", value: "panelTruck" },
+    { label: "Fully Integrated", value: "fullyIntegrated" },
+    { label: "Alcove", value: "alcove" },
+  ];
+
+  // Хендлер для зміни типу кузова
+  const handleFormChange = (e) => {
+    dispatch(setFilter({ form: e.target.value }));
+  };
+
   // Перше завантаження при старті
   useEffect(() => {
     dispatch(fetchCampers(filters));
@@ -34,6 +59,26 @@ const App = () => {
   // Хендлер для пошуку
   const handleSearch = () => {
     dispatch(fetchCampers(filters));
+  };
+
+  const handleCheckboxChange = (name) => (e) => {
+    dispatch(setFilter({ [name]: e.target.checked }));
+  };
+
+  const handleTransmissionToggle = (e) => {
+    // Якщо чекбокс натиснуто (true) -> "automatic"
+    // Якщо галочку знято (false) -> "" (порожній рядок)
+    const value = e.target.checked ? "automatic" : "";
+    dispatch(setFilter({ transmission: value }));
+  };
+
+  // Варіанти кузова (точно як в API)
+  const forms = ["panelTruck", "fullyIntegrated", "alcove"];
+
+  // Хендлер для вибору: якщо клікаємо по вже вибраному — скидаємо в ""
+  const handleFormToggle = (value) => {
+    const newValue = filters.form === value ? "" : value;
+    dispatch(setFilter({ form: newValue }));
   };
 
   return (
@@ -55,6 +100,136 @@ const App = () => {
           value={filters.location}
           onChange={handleLocationChange}
         />
+
+        <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+          {forms.map((type) => (
+            <button
+              key={type}
+              onClick={() => handleFormToggle(type)}
+              style={{
+                padding: "10px 15px",
+                cursor: "pointer",
+                borderRadius: "8px",
+                border: "1px solid #ccc",
+                // Якщо вибрано — підсвічуємо синім
+                backgroundColor: filters.form === type ? "#007bff" : "#fff",
+                color: filters.form === type ? "#fff" : "#000",
+                transition: "all 0.2s ease",
+              }}
+            >
+              {/* Форматуємо назву для читабельності (напр. panelTruck -> Panel Truck) */}
+              {type === "panelTruck"
+                ? "Van"
+                : type === "fullyIntegrated"
+                  ? "Fully Integrated"
+                  : "Alcove"}
+            </button>
+          ))}
+        </div>
+
+        {/* --- ФІЛЬТР FORM (TYPE) --- */}
+        <div style={{ marginBottom: "15px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "5px",
+              fontWeight: "bold",
+            }}
+          >
+            Vehicle Type:
+          </label>
+          <select
+            value={filters.form}
+            onChange={handleFormChange}
+            style={{ padding: "5px", minWidth: "200px" }}
+          >
+            {formOptions.map((opt) => (
+              <option key={opt.value} value={opt.value}>
+                {opt.label}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* --- ВАРІАНТ З RADIO BUTTONS (як альтернатива Select) --- */}
+        <div style={{ marginBottom: "15px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "5px",
+              fontWeight: "bold",
+            }}
+          >
+            Vehicle Type (Radio):
+          </label>
+          {formOptions.map((opt) => (
+            <label
+              key={opt.value}
+              style={{ marginRight: "10px", cursor: "pointer" }}
+            >
+              <input
+                type="radio"
+                name="camperForm"
+                value={opt.value}
+                checked={filters.form === opt.value}
+                onChange={handleFormChange}
+              />
+              {opt.label}
+            </label>
+          ))}
+        </div>
+
+        {/* ТРАНСМІСІЯ */}
+        <div style={{ marginBottom: "15px" }}>
+          <label
+            style={{
+              cursor: "pointer",
+              display: "flex",
+              alignItems: "center",
+              gap: "10px",
+            }}
+          >
+            <input
+              type="checkbox"
+              // Тепер він "активний", тільки якщо в стейті саме "automatic"
+              checked={filters.transmission === "automatic"}
+              onChange={handleTransmissionToggle}
+            />
+            Show only Automatic
+          </label>
+        </div>
+
+        {/* Чекбокси обладнання */}
+        <div style={{ marginBottom: "15px" }}>
+          <label style={{ display: "block", marginBottom: "5px" }}>
+            Equipment:
+          </label>
+          <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
+            {equipmentFilters.map((item) => (
+              <label
+                key={item}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  textTransform: "capitalize",
+                  cursor: "pointer",
+                  padding: "5px 10px",
+                  border: "1px solid #eee",
+                  borderRadius: "5px",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={filters[item]}
+                  onChange={handleCheckboxChange(item)}
+                />
+                {item}
+              </label>
+            ))}
+          </div>
+        </div>
+
         <button onClick={handleSearch} style={{ marginLeft: "10px" }}>
           Search
         </button>
