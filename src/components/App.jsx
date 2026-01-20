@@ -53,7 +53,20 @@ const App = () => {
 
   // Хендлер для зміни фільтра локації
   const handleLocationChange = (e) => {
-    dispatch(setFilter({ location: e.target.value }));
+    const newLocation = e.target.value;
+
+    // 1. Спочатку оновлюємо фільтр в Redux (візуальна частина)
+    dispatch(setFilter({ location: newLocation }));
+
+    // 2. Створюємо актуальний об'єкт фільтрів для запиту
+    // Ми беремо поточні фільтри і перезаписуємо локацію на нову
+    const updatedFilters = {
+      ...filters,
+      location: newLocation,
+    };
+
+    // 3. Робимо запит на сервер
+    dispatch(fetchCampers(updatedFilters));
   };
 
   // Хендлер для пошуку
