@@ -1,8 +1,8 @@
-import { createSlice } from '@reduxjs/toolkit';
-import { fetchCampers, fetchCamperById } from './operations';
+import { createSlice } from "@reduxjs/toolkit";
+import { fetchCampers, fetchCamperById } from "./operations";
 
 const campersSlice = createSlice({
-  name: 'campers',
+  name: "campers",
   initialState: {
     items: [],
     total: 0,
@@ -15,6 +15,7 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.pending, (state) => {
         state.isLoading = true;
         state.error = null;
+        state.items = [];
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.isLoading = false;
