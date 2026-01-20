@@ -81,6 +81,16 @@ const App = () => {
     dispatch(setFilter({ form: newValue }));
   };
 
+  const cities = [
+    "Dnipro",
+    "Kharkiv",
+    "Kyiv",
+    "Lviv",
+    "Odesa",
+    "Poltava",
+    "Sumy",
+  ];
+
   return (
     <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
       <h1>Camper Rental Test</h1>
@@ -94,12 +104,33 @@ const App = () => {
         }}
       >
         <h3>Filters</h3>
-        <input
-          type="text"
-          placeholder="Enter location (e.g. Lviv)"
-          value={filters.location}
-          onChange={handleLocationChange}
-        />
+        {/* --- НОВИЙ СЕЛЕКТ ДЛЯ ЛОКАЦІЙ --- */}
+        <div style={{ marginBottom: "15px" }}>
+          <label
+            style={{
+              display: "block",
+              marginBottom: "5px",
+              fontWeight: "bold",
+            }}
+          >
+            Location:
+          </label>
+          <select
+            value={filters.location}
+            onChange={handleLocationChange}
+            style={{ padding: "8px", width: "200px", cursor: "pointer" }}
+          >
+            {/* Опція для скидання фільтру (null/пусте значення) */}
+            <option value="">All locations</option>
+
+            {/* Рендер міст зі списку */}
+            {cities.map((city) => (
+              <option key={city} value={city}>
+                {city}
+              </option>
+            ))}
+          </select>
+        </div>
 
         <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
           {forms.map((type) => (
