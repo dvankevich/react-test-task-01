@@ -46,28 +46,20 @@ const App = () => {
   ];
 
   useEffect(() => {
-    dispatch(fetchCampers(filters));
+    dispatch(fetchCampers({}));
   }, [dispatch]);
 
-  // --- ОНОВЛЕНИЙ ХЕНДЛЕР ---
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
 
-    // 1. Спочатку оновлюємо фільтр в Redux (візуальна частина)
     dispatch(setFilter({ location: newLocation }));
-
-    // 2. Створюємо актуальний об'єкт фільтрів для запиту
-    // Ми беремо поточні фільтри і перезаписуємо локацію на нову
     const updatedFilters = {
       ...filters,
       location: newLocation,
     };
-
-    // 3. Робимо запит на сервер
     dispatch(fetchCampers(updatedFilters));
   };
 
-  // Інші хендлери залишаються без змін (працюють через кнопку Search)
   const handleSearch = () => {
     dispatch(fetchCampers(filters));
   };
@@ -120,7 +112,7 @@ const App = () => {
             </label>
             <select
               value={filters.location}
-              onChange={handleLocationChange} // Використовуємо новий хендлер
+              onChange={handleLocationChange}
               style={{ padding: "8px", width: "200px", cursor: "pointer" }}
             >
               <option value="">All locations</option>
@@ -223,7 +215,6 @@ const App = () => {
             </div>
           </div>
 
-          {/* Кнопка Search все ще потрібна для інших фільтрів */}
           <button
             onClick={handleSearch}
             style={{
