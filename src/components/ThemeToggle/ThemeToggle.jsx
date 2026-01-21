@@ -1,16 +1,14 @@
 import { useState, useEffect } from "react";
+import { Icon } from "@iconify/react";
 
 const ThemeToggle = () => {
-  // 1. Ініціалізуємо стан: беремо значення з пам'яті або ставимо 'light'
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
 
-  // 2. Щоразу, коли змінюється стан theme, оновлюємо атрибут на сторінці
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
     localStorage.setItem("theme", theme);
   }, [theme]);
 
-  // 3. Функція для зміни теми
   const toggleTheme = () => {
     setTheme(theme === "light" ? "dark" : "light");
   };
@@ -19,17 +17,37 @@ const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       style={{
-        padding: "10px 20px",
+        // Додаємо Flexbox для вирівнювання іконки та тексту
+        display: "flex",
+        alignItems: "center",
+        gap: "8px", // Відступ між іконкою та текстом
+
+        padding: "10px 16px", // Трохи зменшив бічні відступи
         cursor: "pointer",
         borderRadius: "8px",
         border: "1px solid var(--gray-light)",
         backgroundColor: "var(--inputs)",
         color: "var(--main)",
         fontWeight: 600,
+        fontFamily: "inherit", // Щоб наслідувати Inter
         transition: "all 0.3s ease",
       }}
+      // Додаємо aria-label для доступності (щоб скрінрідери розуміли кнопку)
+      aria-label="Toggle light and dark"
     >
-      {theme === "light" ? "🌙 Темна тема" : "☀️ Світла тема"}
+      {theme === "light" ? (
+        /* Якщо зараз світла тема, показуємо Місяць (щоб увімкнути темну) */
+        <>
+          <Icon icon="bi:moon-fill" width="20" height="20" />
+          <span>Темна тема</span>
+        </>
+      ) : (
+        /* Якщо зараз темна тема, показуємо Сонце (щоб увімкнути світлу) */
+        <>
+          <Icon icon="bi:sun-fill" width="20" height="20" />
+          <span>Світла тема</span>
+        </>
+      )}
     </button>
   );
 };
