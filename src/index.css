@@ -1,3 +1,5 @@
+@import "modern-normalize/modern-normalize.css";
+
 @font-face {
   font-family: 'Inter';
   src: url('./fonts/Inter-VariableFont_opsz_wght.ttf') format('truetype');
@@ -14,23 +16,25 @@
   font-style: italic;
 }
 
-* {
+/* reset styles */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
   font-family: 'Inter', sans-serif;
 }
 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 :root {
-  font-family: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  --font-family: "Inter", sans-serif;
 
   --main: #101828;
   --text: #475467;
@@ -42,21 +46,46 @@
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
+
+  color-scheme: light dark;
+
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 150%;
+  color: var(--text);
+  background-color: var(--white);
 }
 
 body {
-  margin: 0;
+  min-height: 100vh;
   display: flex;
   place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+  justify-content: center;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 
 @media (prefers-color-scheme: light) {
   :root {
-    color: #213547;
-    background-color: #ffffff;
+    color: var(--text);
+    background-color: var(--white);
   }
 
 
