@@ -17,35 +17,30 @@ const ThemeToggle = () => {
     <button
       onClick={toggleTheme}
       style={{
-        // Додаємо Flexbox для вирівнювання іконки та тексту
         display: "flex",
         alignItems: "center",
-        gap: "8px", // Відступ між іконкою та текстом
-
-        padding: "10px 16px", // Трохи зменшив бічні відступи
+        padding: "10px ",
         cursor: "pointer",
-        borderRadius: "8px",
+        borderRadius: "12.5rem",
         border: "1px solid var(--gray-light)",
         backgroundColor: "var(--inputs)",
         color: "var(--main)",
         fontWeight: 600,
-        fontFamily: "inherit", // Щоб наслідувати Inter
+        fontFamily: "inherit",
         transition: "all 0.3s ease",
       }}
-      // Додаємо aria-label для доступності (щоб скрінрідери розуміли кнопку)
-      aria-label="Toggle light and dark"
+      aria-label={
+        theme === "light" ? "Enable dark theme" : "Enable light theme"
+      }
+      title={theme === "light" ? "Dark theme" : "Light theme"}
     >
       {theme === "light" ? (
-        /* Якщо зараз світла тема, показуємо Місяць (щоб увімкнути темну) */
         <>
           <Icon icon="bi:moon-fill" width="20" height="20" />
-          <span>Темна тема</span>
         </>
       ) : (
-        /* Якщо зараз темна тема, показуємо Сонце (щоб увімкнути світлу) */
         <>
           <Icon icon="bi:sun-fill" width="20" height="20" />
-          <span>Світла тема</span>
         </>
       )}
     </button>
