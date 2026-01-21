@@ -86,7 +86,7 @@ const App = () => {
   };
 
   return (
-    <div style={{ padding: "20px", fontFamily: "sans-serif" }}>
+    <div style={{ padding: "20px" }}>
       <h1>Camper Rental Test</h1>
       <h2>Icons</h2>
       <MyIconsComponent />

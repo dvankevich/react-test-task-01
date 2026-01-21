@@ -1,5 +1,6 @@
 @import "modern-normalize/modern-normalize.css";
 
+/* 1. Шрифти */
 @font-face {
   font-family: 'Inter';
   src: url('./fonts/Inter-VariableFont_opsz_wght.ttf') format('truetype');
@@ -16,26 +17,19 @@
   font-style: italic;
 }
 
-/* reset styles */
+/* 2. Глобальне скидання та шрифт */
 *,
 *::before,
 *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  font-family: 'Inter', sans-serif;
-}
-
-input,
-button,
-textarea,
-select {
-  font: inherit;
 }
 
 :root {
   --font-family: "Inter", sans-serif;
 
+  /* Світла тема (Original) */
   --main: #101828;
   --text: #475467;
   --white: #fff;
@@ -48,13 +42,45 @@ select {
   --rating: #ffc531;
 
   color-scheme: light dark;
+}
 
+/* 3. Перепризначення кольорів для Темної теми */
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Інверсія: те, що було темним, стає світлим, і навпаки */
+    --main: #f9fafb;
+    /* Був темний текст -> став майже білий */
+    --white: #101828;
+    /* Був білий фон -> став темно-синій */
+    --text: #98a2b3;
+    /* Був сірий текст -> став світло-сірим */
+    --inputs: #1d2939;
+    /* Світлі інпути -> стали темними */
+    --badges: #344054;
+    /* Світлі бейджі -> стали темними */
+    --gray-light: #475467;
+    /* Був світлий бордюр -> став темним */
+    --gray: #6c717b;
+    /* Можна лишити без змін або трохи висвітлити */
+
+    /* Кнопки зазвичай лишають акцентними, але можна підправити відтінок */
+    --button: #f05252;
+  }
+}
+
+/* 4. Застосування стилів */
+html,
+body {
+  /* height: 100%; */
   font-family: var(--font-family);
+  background-color: var(--white);
+  /* У світлій - білий, у темній - #101828 */
+  color: var(--main);
+  /* У світлій - темний, у темній - білий */
   font-weight: 400;
   font-size: 1rem;
-  line-height: 150%;
-  color: var(--text);
-  background-color: var(--white);
+  line-height: 1.5;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 body {
@@ -62,9 +88,30 @@ body {
   display: flex;
   place-items: center;
   justify-content: center;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+/* Тепер всі компоненти автоматично змінять колір */
+input,
+textarea {
+  background-color: var(--inputs);
+  color: var(--main);
+  border: 1px solid var(--gray-light);
+  font: inherit;
+}
+
+button {
+  background-color: var(--button);
+  color: #fff;
+  /* Текст на кнопці завжди білий */
+  cursor: pointer;
+  border: none;
+  font: inherit;
+}
+
+button:hover {
+  background-color: var(--button-hover);
 }
 
 img,
@@ -79,14 +126,4 @@ svg {
 a {
   text-decoration: none;
   color: inherit;
-}
-
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: var(--text);
-    background-color: var(--white);
-  }
-
-
 }
