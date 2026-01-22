@@ -3,15 +3,16 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../redux/campers/operations";
 import { setFilter } from "../redux/filters/slice";
-import { toggleFavorite } from "../redux/favorites/slice";
+//import { toggleFavorite } from "../redux/favorites/slice";
 import {
   selectCampers,
   selectIsLoading,
   selectFilters,
-  selectFavorites,
+  //selectFavorites,
 } from "../redux/selectors";
 // import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
+import VehicleCard from "./VehicleCard/VehicleCard";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ const App = () => {
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectIsLoading);
   const filters = useSelector(selectFilters);
-  const favorites = useSelector(selectFavorites);
+  //const favorites = useSelector(selectFavorites);
 
   const cities = [
     "Dnipro",
@@ -248,57 +249,11 @@ const App = () => {
           <p>Loading campers...</p>
         ) : (
           <div>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-                gap: "20px",
-                marginBottom: "30px",
-              }}
-            >
+            <div>
               {visibleCampers.length > 0 ? (
-                visibleCampers.map((camper) => {
-                  const isFav = favorites.some((fav) => fav.id === camper.id);
-                  return (
-                    <div
-                      key={camper.id}
-                      style={{
-                        border: "1px solid #ddd",
-                        padding: "10px",
-                        borderRadius: "8px",
-                      }}
-                    >
-                      <img
-                        src={camper.gallery[0].thumb}
-                        alt={camper.name}
-                        style={{
-                          width: "100%",
-                          height: "180px",
-                          objectFit: "cover",
-                          borderRadius: "5px",
-                        }}
-                      />
-                      <h3>{camper.name}</h3>
-                      <p>Price: {camper.price} UAH</p>
-                      <p>📍 {camper.location}</p>
-                      <button
-                        onClick={() => dispatch(toggleFavorite(camper))}
-                        style={{
-                          backgroundColor: isFav ? "#ff4d4f" : "#f0f0f0",
-                          color: isFav ? "white" : "black",
-                          border: "none",
-                          padding: "8px 12px",
-                          cursor: "pointer",
-                          borderRadius: "4px",
-                          width: "100%",
-                          marginTop: "10px",
-                        }}
-                      >
-                        {isFav ? "❤️ In Favorites" : "🤍 Add to Favorites"}
-                      </button>
-                    </div>
-                  );
-                })
+                visibleCampers.map((camper) => (
+                  <VehicleCard key={camper.id} camper={camper} />
+                ))
               ) : (
                 <div
                   style={{
