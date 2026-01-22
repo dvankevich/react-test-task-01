@@ -13,6 +13,7 @@ import {
 // import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
 import VehicleCard from "./VehicleCard/VehicleCard";
+import FilterSidebar from "./FilterSidebar/FilterSidebar";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -99,146 +100,7 @@ const App = () => {
         {/*  <h2>Icons</h2>
         <MyIconsComponent /> */}
 
-        <section
-          style={{
-            marginBottom: "20px",
-            padding: "15px",
-            border: "1px solid #ccc",
-            borderRadius: "8px",
-          }}
-        >
-          <h3>Filters</h3>
-
-          {/* --- ЛОКАЦІЯ  --- */}
-          <div style={{ marginBottom: "15px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Location:
-            </label>
-            <select
-              value={filters.location}
-              onChange={handleLocationChange}
-              style={{ padding: "8px", width: "200px", cursor: "pointer" }}
-            >
-              <option value="">All locations</option>
-              {cities.map((city) => (
-                <option key={city} value={city}>
-                  {city}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* --- ТИП КУЗОВА --- */}
-          <div style={{ marginBottom: "15px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Vehicle Type:
-            </label>
-            <div style={{ display: "flex", gap: "10px" }}>
-              {forms.map((type) => (
-                <button
-                  key={type}
-                  onClick={() => handleFormToggle(type)}
-                  style={{
-                    padding: "10px 15px",
-                    cursor: "pointer",
-                    borderRadius: "8px",
-                    border: "1px solid #ccc",
-                    backgroundColor: filters.form === type ? "#007bff" : "#fff",
-                    color: filters.form === type ? "#fff" : "#000",
-                    transition: "all 0.2s ease",
-                  }}
-                >
-                  {type === "panelTruck"
-                    ? "Van"
-                    : type === "fullyIntegrated"
-                      ? "Fully Integrated"
-                      : "Alcove"}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* --- ТРАНСМІСІЯ --- */}
-          <div style={{ marginBottom: "15px" }}>
-            <label
-              style={{
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                gap: "10px",
-              }}
-            >
-              <input
-                type="checkbox"
-                checked={filters.transmission === "automatic"}
-                onChange={handleTransmissionToggle}
-              />
-              Show only Automatic
-            </label>
-          </div>
-
-          {/* --- ОБЛАДНАННЯ --- */}
-          <div style={{ marginBottom: "15px" }}>
-            <label
-              style={{
-                display: "block",
-                marginBottom: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              Equipment:
-            </label>
-            <div style={{ display: "flex", flexWrap: "wrap", gap: "10px" }}>
-              {equipmentFilters.map((item) => (
-                <label
-                  key={item}
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "5px",
-                    textTransform: "capitalize",
-                    padding: "5px",
-                    border: "1px solid #eee",
-                    borderRadius: "4px",
-                  }}
-                >
-                  <input
-                    type="checkbox"
-                    checked={filters[item]}
-                    onChange={handleCheckboxChange(item)}
-                  />
-                  {item}
-                </label>
-              ))}
-            </div>
-          </div>
-
-          <button
-            onClick={handleSearch}
-            style={{
-              padding: "10px 25px",
-              backgroundColor: "#007bff",
-              color: "white",
-              border: "none",
-              borderRadius: "5px",
-              cursor: "pointer",
-            }}
-          >
-            Apply Other Filters
-          </button>
-        </section>
+        <FilterSidebar />
 
         {/* --- СПИСОК --- */}
         {/* <p>

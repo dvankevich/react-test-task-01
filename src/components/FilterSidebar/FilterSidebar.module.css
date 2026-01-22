@@ -1,0 +1,107 @@
+.sidebar {
+  width: 360px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+/* Локація */
+.locationSection {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  color: var(--text);
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.inputWrapper {
+  position: relative;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 18px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--main);
+}
+
+.locationInput {
+  width: 100%;
+  padding: 18px 18px 18px 48px;
+  background-color: var(--inputs);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--main);
+  outline: none;
+}
+
+/* Секції фільтрів */
+.filtersGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.filtersTitle {
+  color: var(--text);
+  font-weight: 500;
+  margin-bottom: 24px;
+}
+
+.sectionTitle {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--main);
+  margin-bottom: 24px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-light);
+}
+
+.filterGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px 12px;
+}
+
+/* Кнопка-фільтр */
+.filterItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 95px;
+  border: 1px solid var(--gray-light);
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--main);
+}
+
+.filterItem:hover {
+  border-color: var(--button);
+}
+
+.filterItemActive {
+  border-color: var(--button) !important;
+}
+
+/* Кнопка пошуку */
+.searchBtn {
+  margin-top: 32px;
+  padding: 16px 60px;
+  background-color: var(--button);
+  color: white;
+  border-radius: 200px;
+  font-weight: 500;
+  width: fit-content;
+}
