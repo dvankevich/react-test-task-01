@@ -1,5 +1,5 @@
 import "./App.css";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../redux/campers/operations";
 import { setFilter } from "../redux/filters/slice";
@@ -10,12 +10,12 @@ import {
   selectFilters,
   selectFavorites,
 } from "../redux/selectors";
-import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
+// import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 import ThemeToggle from "./ThemeToggle/ThemeToggle";
 
 const App = () => {
   const dispatch = useDispatch();
-
+  const [visibleCount, setVisibleCount] = useState(4);
   const campers = useSelector(selectCampers);
   const isLoading = useSelector(selectIsLoading);
   const filters = useSelector(selectFilters);
@@ -51,7 +51,7 @@ const App = () => {
 
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
-
+    setVisibleCount(4);
     dispatch(setFilter({ location: newLocation }));
     const updatedFilters = {
       ...filters,
@@ -61,6 +61,7 @@ const App = () => {
   };
 
   const handleSearch = () => {
+    setVisibleCount(4);
     dispatch(fetchCampers(filters));
   };
 
@@ -78,6 +79,13 @@ const App = () => {
     dispatch(setFilter({ form: newValue }));
   };
 
+  const visibleCampers = campers.slice(0, visibleCount);
+  const hasMore = visibleCount < campers.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((prev) => prev + 4);
+  };
+
   return (
     <>
       <header style={{ position: "absolute", top: "20px", right: "20px" }}>
@@ -86,8 +94,9 @@ const App = () => {
 
       <div style={{ padding: "20px" }}>
         <h1>Camper Rental Test</h1>
-        <h2>Icons</h2>
-        <MyIconsComponent />
+
+        {/*  <h2>Icons</h2>
+        <MyIconsComponent /> */}
 
         <section
           style={{
@@ -99,7 +108,7 @@ const App = () => {
         >
           <h3>Filters</h3>
 
-          {/* --- ЛОКАЦІЯ (Автоматичний пошук) --- */}
+          {/* --- ЛОКАЦІЯ  --- */}
           <div style={{ marginBottom: "15px" }}>
             <label
               style={{
@@ -231,70 +240,95 @@ const App = () => {
         </section>
 
         {/* --- СПИСОК --- */}
-        <p>
+        {/* <p>
           Favorites count: <strong>{favorites.length}</strong>
-        </p>
+        </p> */}
 
         {isLoading ? (
           <p>Loading campers...</p>
         ) : (
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
-              gap: "20px",
-            }}
-          >
-            {campers.length > 0 ? (
-              campers.map((camper) => {
-                const isFav = favorites.some((fav) => fav.id === camper.id);
-                return (
-                  <div
-                    key={camper.id}
-                    style={{
-                      border: "1px solid #ddd",
-                      padding: "10px",
-                      borderRadius: "8px",
-                    }}
-                  >
-                    <img
-                      src={camper.gallery[0].thumb}
-                      alt={camper.name}
+          <div>
+            <div
+              style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))",
+                gap: "20px",
+                marginBottom: "30px",
+              }}
+            >
+              {visibleCampers.length > 0 ? (
+                visibleCampers.map((camper) => {
+                  const isFav = favorites.some((fav) => fav.id === camper.id);
+                  return (
+                    <div
+                      key={camper.id}
                       style={{
-                        width: "100%",
-                        height: "180px",
-                        objectFit: "cover",
-                        borderRadius: "5px",
-                      }}
-                    />
-                    <h3>{camper.name}</h3>
-                    <p>Price: {camper.price} UAH</p>
-                    <p>📍 {camper.location}</p>
-                    <button
-                      onClick={() => dispatch(toggleFavorite(camper))}
-                      style={{
-                        backgroundColor: isFav ? "#ff4d4f" : "#f0f0f0",
-                        color: isFav ? "white" : "black",
-                        border: "none",
-                        padding: "8px 12px",
-                        cursor: "pointer",
-                        borderRadius: "4px",
-                        width: "100%",
-                        marginTop: "10px",
+                        border: "1px solid #ddd",
+                        padding: "10px",
+                        borderRadius: "8px",
                       }}
                     >
-                      {isFav ? "❤️ In Favorites" : "🤍 Add to Favorites"}
-                    </button>
-                  </div>
-                );
-              })
-            ) : (
-              <div
-                style={{ textAlign: "center", padding: "40px", color: "#666" }}
+                      <img
+                        src={camper.gallery[0].thumb}
+                        alt={camper.name}
+                        style={{
+                          width: "100%",
+                          height: "180px",
+                          objectFit: "cover",
+                          borderRadius: "5px",
+                        }}
+                      />
+                      <h3>{camper.name}</h3>
+                      <p>Price: {camper.price} UAH</p>
+                      <p>📍 {camper.location}</p>
+                      <button
+                        onClick={() => dispatch(toggleFavorite(camper))}
+                        style={{
+                          backgroundColor: isFav ? "#ff4d4f" : "#f0f0f0",
+                          color: isFav ? "white" : "black",
+                          border: "none",
+                          padding: "8px 12px",
+                          cursor: "pointer",
+                          borderRadius: "4px",
+                          width: "100%",
+                          marginTop: "10px",
+                        }}
+                      >
+                        {isFav ? "❤️ In Favorites" : "🤍 Add to Favorites"}
+                      </button>
+                    </div>
+                  );
+                })
+              ) : (
+                <div
+                  style={{
+                    textAlign: "center",
+                    padding: "40px",
+                    color: "#666",
+                  }}
+                >
+                  <h3>No campers found 😢</h3>
+                </div>
+              )}
+            </div>
+
+            {hasMore && !isLoading && (
+              <button
+                onClick={handleLoadMore}
+                style={{
+                  display: "block",
+                  margin: "0 auto",
+                  padding: "12px 30px",
+                  backgroundColor: "transparent",
+                  color: "#101828",
+                  border: "1px solid #475467",
+                  borderRadius: "200px",
+                  fontWeight: "500",
+                  cursor: "pointer",
+                }}
               >
-                <h3>No campers found 😢</h3>
-                <p>Try changing the filters or search location.</p>
-              </div>
+                Load more
+              </button>
             )}
           </div>
         )}
