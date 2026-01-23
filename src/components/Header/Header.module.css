@@ -2,9 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 64px;
+  padding: 24px 64px;
   background-color: var(--badges);
-  /* Світло-сірий фон як на макеті */
+  width: 100%;
 }
 
 .logo {
@@ -27,6 +27,5 @@
 .activeLink {
   text-decoration: none;
   color: var(--button);
-  /* Червоний активний колір */
   font-weight: 500;
 }
