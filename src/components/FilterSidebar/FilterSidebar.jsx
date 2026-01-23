@@ -3,14 +3,12 @@ import { Icon } from "@iconify/react";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
 import { selectFilters } from "../../redux/selectors";
-import LocationFilter from "../LocationFilter/LocationFilter"; // <--- Імпорт
+import LocationFilter from "../LocationFilter/LocationFilter";
 import styles from "./FilterSidebar.module.css";
 
 const FilterSidebar = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
-
-  // handleLocationChange переїхав у LocationFilter
 
   const handleEquipmentToggle = (name) => {
     if (name === "transmission") {
@@ -32,7 +30,6 @@ const FilterSidebar = () => {
 
   return (
     <aside className={styles.sidebar}>
-      {/* Використовуємо новий компонент */}
       <LocationFilter />
 
       <div className={styles.filtersGroup}>
