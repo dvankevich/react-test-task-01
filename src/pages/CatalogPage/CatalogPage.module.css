@@ -1,0 +1,49 @@
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 40px 64px;
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  /* Сайдбар 360px, інше — картки */
+  gap: 64px;
+  /* Відступ між колонками */
+  align-items: start;
+}
+
+.catalogSection {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  /* Відступ між картками */
+}
+
+.loadMoreBtn {
+  margin: 32px auto 0;
+  padding: 16px 32px;
+  background-color: transparent;
+  color: var(--main);
+  border: 1px solid var(--gray-light);
+  border-radius: 200px;
+  font-weight: 500;
+  font-size: 16px;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+
+.loadMoreBtn:hover {
+  border-color: var(--button);
+  background-color: transparent;
+  /* Перебиваємо стандартний ховер кнопок */
+}
+
+.noResults {
+  text-align: center;
+  padding: 100px 0;
+  color: var(--text);
+}
