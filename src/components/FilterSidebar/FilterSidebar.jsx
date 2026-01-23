@@ -3,18 +3,16 @@ import { Icon } from "@iconify/react";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
 import { selectFilters } from "../../redux/selectors";
+import LocationFilter from "../LocationFilter/LocationFilter"; // <--- Імпорт
 import styles from "./FilterSidebar.module.css";
 
 const FilterSidebar = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
 
-  const handleLocationChange = (e) => {
-    dispatch(setFilter({ location: e.target.value }));
-  };
+  // handleLocationChange переїхав у LocationFilter
 
   const handleEquipmentToggle = (name) => {
-    // Якщо це transmission, логіка трохи інша (automatic/null)
     if (name === "transmission") {
       const newValue = filters.transmission === "automatic" ? "" : "automatic";
       dispatch(setFilter({ transmission: newValue }));
@@ -34,20 +32,8 @@ const FilterSidebar = () => {
 
   return (
     <aside className={styles.sidebar}>
-      {/* Location */}
-      <div className={styles.locationSection}>
-        <label className={styles.label}>Location</label>
-        <div className={styles.inputWrapper}>
-          <Icon icon="bi:map" className={styles.inputIcon} width="20" />
-          <input
-            type="text"
-            className={styles.locationInput}
-            placeholder="Kyiv, Ukraine"
-            value={filters.location}
-            onChange={handleLocationChange}
-          />
-        </div>
-      </div>
+      {/* Використовуємо новий компонент */}
+      <LocationFilter />
 
       <div className={styles.filtersGroup}>
         <p className={styles.filtersTitle}>Filters</p>
