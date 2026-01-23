@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import VehicleCard from "../VehicleCard/VehicleCard";
 import { selectCampers, selectIsLoading } from "../../redux/selectors";
@@ -11,11 +11,20 @@ const CamperList = () => {
   const [visibleCount, setVisibleCount] = useState(4);
   const [prevCampers, setPrevCampers] = useState(campers);
 
-  // Скидання стану ПІД ЧАС рендеру
   if (campers !== prevCampers) {
     setPrevCampers(campers);
     setVisibleCount(4);
   }
+
+  // Scroll
+  useEffect(() => {
+    if (visibleCount > 4) {
+      window.scrollBy({
+        top: 600,
+        behavior: "smooth",
+      });
+    }
+  }, [visibleCount]);
 
   const visibleCampers = campers.slice(0, visibleCount);
   const hasMore = visibleCount < campers.length;
