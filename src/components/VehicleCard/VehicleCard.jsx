@@ -1,5 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
+import { Link } from "react-router-dom";
 import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
@@ -80,7 +81,9 @@ const VehicleCard = ({ camper }) => {
           )}
         </div>
 
-        <button className={styles.showMoreBtn}>Show more</button>
+        <Link to={`/catalog/${camper.id}`} className={styles.showMoreBtn}>
+          Show more
+        </Link>
       </div>
     </div>
   );

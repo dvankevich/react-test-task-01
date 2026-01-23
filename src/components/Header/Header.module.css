@@ -1,0 +1,32 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 64px;
+  background-color: var(--badges);
+  /* Світло-сірий фон як на макеті */
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 20px;
+  color: var(--main);
+}
+
+.nav {
+  display: flex;
+  gap: 32px;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--main);
+  font-weight: 500;
+}
+
+.activeLink {
+  text-decoration: none;
+  color: var(--button);
+  /* Червоний активний колір */
+  font-weight: 500;
+}
