@@ -1,0 +1,32 @@
+.themeBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  cursor: pointer;
+
+  border-radius: 12.5rem;
+  border: 1px solid var(--gray-light);
+  background-color: var(--inputs);
+  color: var(--main);
+
+  font-weight: 600;
+  font-family: inherit;
+
+  transition: all 0.3s ease;
+  outline: none;
+}
+
+.themeBtn:hover {
+  border-color: var(--button);
+  background-color: var(--badges);
+}
+
+.themeBtn:active {
+  transform: scale(0.95);
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+}

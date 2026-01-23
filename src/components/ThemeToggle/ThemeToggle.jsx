@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Icon } from "@iconify/react";
+import styles from "./ThemeToggle.module.css";
 
 const ThemeToggle = () => {
   const [theme, setTheme] = useState(localStorage.getItem("theme") || "light");
@@ -10,39 +11,25 @@ const ThemeToggle = () => {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
+    setTheme((prev) => (prev === "light" ? "dark" : "light"));
   };
 
   return (
     <button
       onClick={toggleTheme}
-      style={{
-        display: "flex",
-        alignItems: "center",
-        padding: "10px ",
-        cursor: "pointer",
-        borderRadius: "12.5rem",
-        border: "1px solid var(--gray-light)",
-        backgroundColor: "var(--inputs)",
-        color: "var(--main)",
-        fontWeight: 600,
-        fontFamily: "inherit",
-        transition: "all 0.3s ease",
-      }}
+      className={styles.themeBtn}
       aria-label={
         theme === "light" ? "Enable dark theme" : "Enable light theme"
       }
       title={theme === "light" ? "Dark theme" : "Light theme"}
     >
-      {theme === "light" ? (
-        <>
+      <span className={styles.icon}>
+        {theme === "light" ? (
           <Icon icon="bi:moon-fill" width="20" height="20" />
-        </>
-      ) : (
-        <>
+        ) : (
           <Icon icon="bi:sun-fill" width="20" height="20" />
-        </>
-      )}
+        )}
+      </span>
     </button>
   );
 };
