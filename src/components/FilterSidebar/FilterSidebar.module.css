@@ -89,6 +89,8 @@
 
 .filterItem:hover {
   border-color: var(--button);
+  background-color: transparent !important;
+  outline: none;
 }
 
 .filterItemActive {
