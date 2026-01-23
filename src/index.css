@@ -50,6 +50,23 @@
   }
 }
 
+ul,
+ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
 
 *,
 *::before,
@@ -77,8 +94,6 @@ body {
   padding: 0;
   min-height: 100vh;
   display: flex;
-  place-items: center;
-  justify-content: center;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -92,6 +107,7 @@ select {
   font-family: inherit;
   padding: 8px;
   border-radius: 4px;
+  outline: none;
 }
 
 button {
