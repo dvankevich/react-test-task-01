@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import ThemeToggle from "../ThemeToggle/ThemeToggle";
 import styles from "./Header.module.css";
 
 const Header = () => {
@@ -23,6 +24,7 @@ const Header = () => {
           Catalog
         </NavLink>
       </nav>
+      <ThemeToggle />
     </header>
   );
 };

@@ -8,17 +8,16 @@
   font-style: normal;
 }
 
-/* light theme by default */
+/* 1. Світла тема (дефолт) */
 :root {
   --font-family: "Inter", sans-serif;
-
-  --white: #ffffff;
   --main: #101828;
   --text: #475467;
-  --inputs: #ffffff;
-  --badges: #F2F4F7;
-  --gray-light: #eaecf0;
-
+  --white: #fff;
+  --inputs: #f7f7f7;
+  --badges: #f2f4f7;
+  --gray: #6c717b;
+  --gray-light: #dadde1;
   --button: #e44848;
   --button-hover: #d84343;
   --rating: #ffc531;
@@ -26,7 +25,7 @@
   color-scheme: light;
 }
 
-/* dark theme*/
+/* 2. Набір кольорів для темної теми (створюємо перевизначення) */
 [data-theme="dark"] {
   --white: #101828;
   --main: #f9fafb;
@@ -34,21 +33,19 @@
   --inputs: #1d2939;
   --badges: #344054;
   --gray-light: #475467;
-
-
   color-scheme: dark;
 }
 
-/* AUTOMATIC DARK THEME (System Settings) */
+/* 3. Автоматичне включення, ЯКЩО користувач не обрав тему вручну */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
+    /* Копіюємо сюди логіку з [data-theme="dark"] */
     --white: #101828;
     --main: #f9fafb;
     --text: #98a2b3;
     --inputs: #1d2939;
     --badges: #344054;
     --gray-light: #475467;
-
     color-scheme: dark;
   }
 }
