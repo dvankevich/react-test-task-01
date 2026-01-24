@@ -120,16 +120,31 @@
   margin-bottom: 24px;
 }
 
+.capitalize {
+  text-transform: capitalize;
+}
+
 .detailsList {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .detailsList li {
   display: flex;
   justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--gray-light);
   font-weight: 500;
+  font-size: 18px;
+}
+
+.detailsList li span:first-child {
+  color: var(--main);
+}
+
+.detailsList li span:last-child {
+  color: var(--main);
 }
 
 /* Відгуки */
@@ -163,15 +178,17 @@
 }
 
 /* Форма */
-.bookingForm {
+.bookingFormCard {
+  background: transparent;
   border: 1px solid var(--gray-light);
   padding: 24px;
   border-radius: 10px;
 }
 
-.bookingSub {
+.formNote {
   color: var(--text);
   margin-top: 8px;
+  margin-bottom: 24px;
 }
 
 .form {
@@ -192,9 +209,18 @@
 }
 
 .sendBtn {
-  margin-top: 24px;
+  background-color: var(--button);
+  color: white;
+  border: none;
   padding: 16px 60px;
   border-radius: 200px;
+  font-weight: 500;
+  cursor: pointer;
   width: fit-content;
-  align-self: center;
+  align-self: flex-start;
+  transition: background-color 0.3s;
+}
+
+.sendBtn:hover {
+  background-color: var(--button-hover);
 }
