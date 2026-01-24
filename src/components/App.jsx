@@ -6,6 +6,7 @@ import Header from "./Header/Header";
 import HomePage from "../pages/HomePage/HomePage";
 import CatalogPage from "../pages/CatalogPage/CatalogPage";
 import CamperPage from "../pages/CamperPage/CamperPage";
+import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,6 +21,7 @@ const App = () => {
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
         <Route path="/catalog/:id" element={<CamperPage />} />
+        <Route path="/icons" element={<MyIconsComponent />} />
         <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
     </>
