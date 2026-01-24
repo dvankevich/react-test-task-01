@@ -5,8 +5,9 @@ import { fetchCampers } from "../redux/campers/operations";
 import Header from "./Header/Header";
 import HomePage from "../pages/HomePage/HomePage";
 import CatalogPage from "../pages/CatalogPage/CatalogPage";
-import CamperPage from "../pages/CamperPage/CamperPage";
+//import CamperPage from "../pages/CamperPage/CamperPage";
 import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
+import CamperDetailsPage from "../pages/CamperDetailsPage/CamperDetailsPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -20,7 +21,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
-        <Route path="/catalog/:id" element={<CamperPage />} />
+        <Route path="/catalog/:id" element={<CamperDetailsPage />} />
         <Route path="/icons" element={<MyIconsComponent />} />
         <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
