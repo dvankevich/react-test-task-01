@@ -2,27 +2,69 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import { fetchCamperById } from "../../redux/campers/operations";
+import { fetchCamperById } from "../../redux/campers/operations"; //
 import styles from "./CamperDetailsPage.module.css";
+
+const featureConfig = [
+  { key: "transmission", icon: "bi:diagram-3", label: (c) => c.transmission },
+  { key: "engine", icon: "bi:fuel-pump", label: (c) => c.engine },
+  { key: "AC", icon: "bi:wind", label: () => "AC" },
+  { key: "bathroom", icon: "ph:shower", label: () => "Bathroom" },
+  { key: "kitchen", icon: "bi:cup-hot", label: () => "Kitchen" },
+  { key: "TV", icon: "bi:tv", label: () => "TV" },
+  { key: "radio", icon: "bi:ui-radios", label: () => "Radio" },
+  {
+    key: "refrigerator",
+    icon: "lucide:refrigerator",
+    label: () => "Refrigerator",
+  },
+  { key: "microwave", icon: "lucide:microwave", label: () => "Microwave" },
+  { key: "gas", icon: "hugeicons:gas-stove", label: () => "Gas" },
+  { key: "water", icon: "ion:water-outline", label: () => "Water" },
+];
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+
+  // 2Do use selectors from selectors.js
   const camper = useSelector((state) => state.campers.currentCamper);
   const isLoading = useSelector((state) => state.campers.isLoading);
 
   const [activeTab, setActiveTab] = useState("features");
 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    bookingDate: "",
+    comment: "",
+  });
+
   useEffect(() => {
-    dispatch(fetchCamperById(id));
+    dispatch(fetchCamperById(id)); //
   }, [dispatch, id]);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Booking Submitted:", formData);
+
+    alert("Success! Your booking request has been sent.");
+
+    setFormData({ name: "", email: "", bookingDate: "", comment: "" });
+  };
 
   if (isLoading || !camper)
     return <div className={styles.loading}>Loading...</div>;
 
+  console.log("camper", camper);
+
   return (
     <main className={styles.container}>
-      {/* 1. Заголовок та основна інформація */}
       <section className={styles.header}>
         <h1 className={styles.title}>{camper.name}</h1>
         <div className={styles.meta}>
@@ -40,7 +82,6 @@ const CamperDetailsPage = () => {
         <p className={styles.price}>€{camper.price.toFixed(2)}</p>
       </section>
 
-      {/* 2. Галерея зображень */}
       <section className={styles.gallery}>
         {camper.gallery.map((img, index) => (
           <div key={index} className={styles.imageThumb}>
@@ -49,10 +90,8 @@ const CamperDetailsPage = () => {
         ))}
       </section>
 
-      {/* 3. Опис */}
       <p className={styles.description}>{camper.description}</p>
 
-      {/* 4. Таби (Features / Reviews) */}
       <div className={styles.tabs}>
         <button
           className={activeTab === "features" ? styles.activeTab : ""}
@@ -69,28 +108,28 @@ const CamperDetailsPage = () => {
       </div>
 
       <div className={styles.layout}>
-        {/* Ліва частина: Контент вкладок */}
         <div className={styles.contentLeft}>
           {activeTab === "features" ? (
             <div className={styles.features}>
               <div className={styles.badges}>
-                <div className={styles.badge}>
-                  <Icon icon="bi:diagram-3" /> {camper.transmission}
-                </div>
-                <div className={styles.badge}>
-                  <Icon icon="bi:wind" /> AC
-                </div>
-                <div className={styles.badge}>
-                  <Icon icon="bi:fuel-pump" /> {camper.engine}
-                </div>
-                <div className={styles.badge}>
-                  <Icon icon="bi:cup-hot" /> Kitchen
-                </div>
-                <div className={styles.badge}>
-                  <Icon icon="bi:ui-radios" /> Radio
-                </div>
-              </div>
+                {featureConfig.map((feature) => {
+                  const isVisible =
+                    typeof camper[feature.key] === "boolean"
+                      ? camper[feature.key]
+                      : !!camper[feature.key];
 
+                  if (!isVisible) return null;
+
+                  return (
+                    <div key={feature.key} className={styles.badge}>
+                      <Icon icon={feature.icon} />
+                      <span className={styles.badgeLabel}>
+                        {feature.label(camper)}
+                      </span>
+                    </div>
+                  );
+                })}
+              </div>
               <h3 className={styles.subTitle}>Vehicle details</h3>
               <ul className={styles.detailsList}>
                 <li>
@@ -143,23 +182,47 @@ const CamperDetailsPage = () => {
           )}
         </div>
 
-        {/* Права частина: Форма бронювання */}
+        {/* Форма з обробкою події */}
         <aside className={styles.bookingSidebar}>
           <div className={styles.bookingForm}>
             <h3>Book your campervan now</h3>
             <p className={styles.bookingSub}>
               Stay connected! We are always ready to help you.
             </p>
-            <form className={styles.form}>
-              <input type="text" placeholder="Name*" required />
-              <input type="email" placeholder="Email*" required />
+            <form className={styles.form} onSubmit={handleSubmit}>
               <input
                 type="text"
-                placeholder="Booking date*"
-                onFocus={(e) => (e.target.type = "date")}
+                name="name"
+                placeholder="Name*"
+                value={formData.name}
+                onChange={handleInputChange}
                 required
               />
-              <textarea placeholder="Comment" rows="4"></textarea>
+              <input
+                type="email"
+                name="email"
+                placeholder="Email*"
+                value={formData.email}
+                onChange={handleInputChange}
+                required
+              />
+              <input
+                type="text"
+                name="bookingDate"
+                placeholder="Booking date*"
+                onFocus={(e) => (e.target.type = "date")}
+                onBlur={(e) => !e.target.value && (e.target.type = "text")}
+                value={formData.bookingDate}
+                onChange={handleInputChange}
+                required
+              />
+              <textarea
+                name="comment"
+                placeholder="Comment"
+                rows="4"
+                value={formData.comment}
+                onChange={handleInputChange}
+              ></textarea>
               <button type="submit" className={styles.sendBtn}>
                 Send
               </button>
