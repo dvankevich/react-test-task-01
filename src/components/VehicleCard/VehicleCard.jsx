@@ -11,8 +11,25 @@ const VehicleCard = ({ camper }) => {
 
   const isFavorite = favorites.some((fav) => fav.id === camper.id);
 
-  // Форматування ціни
   const formattedPrice = `€${camper.price.toFixed(2)}`;
+
+  const allFeatures = [
+    { key: "transmission", icon: "bi:diagram-3", label: (c) => c.transmission },
+    { key: "engine", icon: "bi:fuel-pump", label: (c) => c.engine },
+    { key: "AC", icon: "bi:wind", label: () => "AC" },
+    { key: "bathroom", icon: "ph:shower", label: () => "Bathroom" },
+    { key: "kitchen", icon: "bi:cup-hot", label: () => "Kitchen" },
+    { key: "TV", icon: "bi:tv", label: () => "TV" },
+    { key: "radio", icon: "bi:ui-radios", label: () => "Radio" },
+    {
+      key: "refrigerator",
+      icon: "lucide:refrigerator",
+      label: () => "Refrigerator",
+    },
+    { key: "microwave", icon: "lucide:microwave", label: () => "Microwave" },
+    { key: "gas", icon: "hugeicons:gas-stove", label: () => "Gas" },
+    { key: "water", icon: "ion:water-outline", label: () => "Water" },
+  ];
 
   return (
     <div className={styles.card}>
@@ -59,26 +76,23 @@ const VehicleCard = ({ camper }) => {
 
         {/* Категорії/Бейджи */}
         <div className={styles.categories}>
-          <div className={styles.category}>
-            <Icon icon="bi:diagram-3" />
-            {camper.transmission}
-          </div>
-          <div className={styles.category}>
-            <Icon icon="bi:fuel-pump" />
-            {camper.engine}
-          </div>
-          {camper.kitchen && (
-            <div className={styles.category}>
-              <Icon icon="bi:cup-hot" />
-              Kitchen
-            </div>
-          )}
-          {camper.AC && (
-            <div className={styles.category}>
-              <Icon icon="bi:wind" />
-              AC
-            </div>
-          )}
+          {allFeatures.map((feature) => {
+            const isVisible =
+              typeof camper[feature.key] === "boolean"
+                ? camper[feature.key]
+                : !!camper[feature.key];
+
+            if (!isVisible) return null;
+
+            return (
+              <div key={feature.key} className={styles.category}>
+                <Icon icon={feature.icon} />
+                <span className={styles.capitalize}>
+                  {feature.label(camper)}
+                </span>
+              </div>
+            );
+          })}
         </div>
 
         <Link to={`/catalog/${camper.id}`} className={styles.showMoreBtn}>
