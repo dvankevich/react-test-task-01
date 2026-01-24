@@ -135,21 +135,25 @@ const CamperDetailsPage = () => {
               <ul className={styles.detailsList}>
                 <li>
                   <span>Form</span>{" "}
-                  <span style={{ textTransform: "capitalize" }}>
-                    {camper.form.replace(/([A-Z])/g, " $1").trim()}
+                  <span className={styles.capitalize}>
+                    {camper.form.replace(/([A-Z])/g, " $1")}
                   </span>
                 </li>
                 <li>
-                  <span>Length</span> <span>{camper.length}</span>
+                  <span>Length</span>
+                  <span>{parseFloat(camper.length)} m</span>
                 </li>
                 <li>
-                  <span>Width</span> <span>{camper.width}</span>
+                  <span>Width</span>
+                  <span>{parseFloat(camper.width)} m</span>
                 </li>
                 <li>
-                  <span>Height</span> <span>{camper.height}</span>
+                  <span>Height</span>
+                  <span>{parseFloat(camper.height)} m</span>
                 </li>
                 <li>
-                  <span>Tank</span> <span>{camper.tank}</span>
+                  <span>Tank</span>
+                  <span>{parseFloat(camper.tank)} l</span>
                 </li>
                 <li>
                   <span>Consumption</span> <span>{camper.consumption}</span>
