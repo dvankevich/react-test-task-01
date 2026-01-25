@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { NavLink, Outlet } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { fetchCamperById } from "../../redux/campers/operations";
 import styles from "./CamperDetailsPage.module.css";
@@ -11,7 +12,6 @@ const CamperDetailsPage = () => {
 
   const camper = useSelector((state) => state.campers.currentCamper);
   const isLoading = useSelector((state) => state.campers.isLoading);
-  const [activeTab, setActiveTab] = useState("features");
 
   const [formData, setFormData] = useState({
     name: "",
@@ -38,25 +38,6 @@ const CamperDetailsPage = () => {
 
   if (isLoading || !camper)
     return <div className={styles.loading}>Loading...</div>;
-
-  // Конфігурація для бейджів характеристик
-  const featureConfig = [
-    { key: "transmission", icon: "bi:diagram-3", label: (c) => c.transmission },
-    { key: "engine", icon: "bi:fuel-pump", label: (c) => c.engine },
-    { key: "AC", icon: "bi:wind", label: () => "AC" },
-    { key: "bathroom", icon: "ph:shower", label: () => "Bathroom" },
-    { key: "kitchen", icon: "bi:cup-hot", label: () => "Kitchen" },
-    { key: "TV", icon: "bi:tv", label: () => "TV" },
-    { key: "radio", icon: "bi:ui-radios", label: () => "Radio" },
-    {
-      key: "refrigerator",
-      icon: "lucide:refrigerator",
-      label: () => "Refrigerator",
-    },
-    { key: "microwave", icon: "lucide:microwave", label: () => "Microwave" },
-    { key: "gas", icon: "hugeicons:gas-stove", label: () => "Gas" },
-    { key: "water", icon: "ion:water-outline", label: () => "Water" },
-  ];
 
   return (
     <main className={styles.container}>
@@ -91,103 +72,24 @@ const CamperDetailsPage = () => {
 
       {/* Таби */}
       <div className={styles.tabs}>
-        <button
-          className={activeTab === "features" ? styles.activeTab : ""}
-          onClick={() => setActiveTab("features")}
+        <NavLink
+          to="features"
+          className={({ isActive }) => (isActive ? styles.activeTab : "")}
         >
           Features
-        </button>
-        <button
-          className={activeTab === "reviews" ? styles.activeTab : ""}
-          onClick={() => setActiveTab("reviews")}
+        </NavLink>
+        <NavLink
+          to="reviews"
+          className={({ isActive }) => (isActive ? styles.activeTab : "")}
         >
           Reviews
-        </button>
+        </NavLink>
       </div>
 
       <div className={styles.layout}>
         {/* ЛІВА ЧАСТИНА */}
         <div className={styles.contentLeft}>
-          {activeTab === "features" ? (
-            <div className={styles.featuresSection}>
-              {/* Динамічні бейджі */}
-              <div className={styles.badges}>
-                {featureConfig.map((item) => {
-                  const isVisible =
-                    typeof camper[item.key] === "boolean"
-                      ? camper[item.key]
-                      : !!camper[item.key];
-
-                  if (!isVisible) return null;
-
-                  return (
-                    <div key={item.key} className={styles.badge}>
-                      <Icon icon={item.icon} />
-                      <span className={styles.capitalize}>
-                        {item.label(camper)}
-                      </span>
-                    </div>
-                  );
-                })}
-              </div>
-
-              <h3 className={styles.subTitle}>Vehicle details</h3>
-              <ul className={styles.detailsList}>
-                <li>
-                  <span>Form</span>{" "}
-                  <span className={styles.capitalize}>
-                    {camper.form.replace(/([A-Z])/g, " $1")}
-                  </span>
-                </li>
-                <li>
-                  <span>Length</span>
-                  <span>{parseFloat(camper.length)} m</span>
-                </li>
-                <li>
-                  <span>Width</span>
-                  <span>{parseFloat(camper.width)} m</span>
-                </li>
-                <li>
-                  <span>Height</span>
-                  <span>{parseFloat(camper.height)} m</span>
-                </li>
-                <li>
-                  <span>Tank</span>
-                  <span>{parseFloat(camper.tank)} l</span>
-                </li>
-                <li>
-                  <span>Consumption</span> <span>{camper.consumption}</span>
-                </li>
-              </ul>
-            </div>
-          ) : (
-            <div className={styles.reviewsList}>
-              {camper.reviews.map((rev, i) => (
-                <div key={i} className={styles.reviewCard}>
-                  <div className={styles.reviewHeader}>
-                    <div className={styles.avatar}>{rev.reviewer_name[0]}</div>
-                    <div>
-                      <p className={styles.reviewerName}>{rev.reviewer_name}</p>
-                      <div className={styles.stars}>
-                        {[...Array(5)].map((_, s) => (
-                          <Icon
-                            key={s}
-                            icon="bi:star-fill"
-                            color={
-                              s < rev.reviewer_rating
-                                ? "#FFC531"
-                                : "var(--badges)"
-                            }
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                  <p className={styles.reviewComment}>{rev.comment}</p>
-                </div>
-              ))}
-            </div>
-          )}
+          <Outlet context={{ camper }} />
         </div>
 
         {/* ПРАВА ЧАСТИНА (Sidebar) */}

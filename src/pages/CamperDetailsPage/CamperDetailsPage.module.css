@@ -1,7 +1,13 @@
+/* Основний контейнер */
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 40px 64px;
+}
+
+/* Заголовок та мета-дані */
+.header {
+  margin-bottom: 24px;
 }
 
 .title {
@@ -34,11 +40,11 @@
   margin-bottom: 24px;
 }
 
+/* Галерея */
 .gallery {
   display: flex;
   gap: 16px;
   margin-bottom: 28px;
-  overflow: hidden;
 }
 
 .imageThumb {
@@ -55,13 +61,14 @@
   object-fit: cover;
 }
 
+/* Опис */
 .description {
   color: var(--text);
   line-height: 1.5;
   margin-bottom: 44px;
-  max-width: 100%;
 }
 
+/* Таби (Навігація) */
 .tabs {
   display: flex;
   gap: 40px;
@@ -69,149 +76,48 @@
   margin-bottom: 44px;
 }
 
-.tabs button {
-  background: none;
-  border: none;
+.tabs a {
+  text-decoration: none;
   padding: 0 0 24px 0;
   font-size: 20px;
   font-weight: 600;
   color: var(--main);
   cursor: pointer;
+  border-bottom: 5px solid transparent;
+  transition: border-color 0.3s;
 }
 
 .tabs .activeTab {
-  border-bottom: 5px solid var(--button);
-  /* Червона лінія як на макеті */
+  border-bottom-color: var(--button);
 }
 
+/* Сітка макету (Дві колонки) */
 .layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
+  align-items: stretch;
+  /* Щоб ліва і права частини були однієї висоти */
 }
 
-@media (max-width: 768px) {
-  .layout {
-    grid-template-columns: 1fr;
-  }
-}
-
+/* Ліва частина (Outlet контейнер) */
 .contentLeft {
-  border-radius: 10px;
+  /* border-radius: 10px;
   padding: 44px 52px;
-  background: var(--inputs);
+  background: var(--inputs); */
   height: 100%;
 }
 
-.featuresSection {
+/* Права частина (Форма) */
+.bookingSidebar {
   height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 
-.badges {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.badge {
-  padding: 12px 18px;
-  background: var(--badges);
-  mix-blend-mode: multiply;
-  border-radius: 100px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  text-transform: capitalize;
-}
-
-.badgeLabel {
-  text-transform: capitalize;
-}
-
-.subTitle {
-  font-size: 20px;
-  font-weight: 600;
-  padding-bottom: 24px;
-  border-bottom: 1px solid var(--gray-light);
-  margin-bottom: 24px;
-  margin-top: auto;
-}
-
-.capitalize {
-  text-transform: capitalize;
-}
-
-.detailsList {
-  list-style: none;
-  padding: 0;
-  margin: 0;
-
-}
-
-.detailsList li {
-  display: flex;
-  justify-content: space-between;
-  font-weight: 500;
-  font-size: 16px;
-  line-height: 1.5;
-  margin-bottom: 16px;
-}
-
-.detailsList li:last-child {
-  margin-bottom: 0;
-}
-
-.detailsList li span:first-child {
-  color: var(--main);
-}
-
-.detailsList li span:last-child {
-  color: var(--main);
-}
-
-/* Відгуки */
-.reviewCard {
-  margin-bottom: 44px;
-}
-
-.reviewHeader {
-  display: flex;
-  gap: 16px;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.avatar {
-  width: 60px;
-  height: 60px;
-  background: var(--badges);
-  color: var(--button);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 24px;
-  font-weight: 600;
-}
-
-.stars {
-  display: flex;
-  gap: 4px;
-}
-
-/* Форма */
 .bookingFormCard {
-  background: transparent;
   border: 1px solid var(--gray-light);
   padding: 44px;
   border-radius: 10px;
-
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
 }
 
 .formNote {
@@ -224,7 +130,6 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-  margin-top: 24px;
 }
 
 .form input,
@@ -235,6 +140,7 @@
   background: var(--inputs);
   border-radius: 12px;
   font-size: 16px;
+  outline: none;
 }
 
 .sendBtn {
@@ -242,18 +148,27 @@
   color: white;
   border: none;
   display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 24px;
+  margin: 24px auto 0;
+  /* Центрування */
   padding: 16px 60px;
   border-radius: 200px;
   font-weight: 500;
   cursor: pointer;
   width: fit-content;
-  align-self: flex-start;
   transition: background-color 0.3s;
 }
 
 .sendBtn:hover {
   background-color: var(--button-hover);
+}
+
+/* Адаптивність */
+@media (max-width: 768px) {
+  .layout {
+    grid-template-columns: 1fr;
+  }
+
+  .container {
+    padding: 20px;
+  }
 }

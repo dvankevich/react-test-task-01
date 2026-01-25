@@ -1,0 +1,60 @@
+.featuresSection {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: var(--inputs);
+  padding: 44px 52px;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 44px;
+}
+
+.badge {
+  padding: 12px 18px;
+  background: var(--badges);
+  mix-blend-mode: multiply;
+  border-radius: 100px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.subTitle {
+  font-size: 20px;
+  font-weight: 600;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--gray-light);
+  margin-bottom: 24px;
+  margin-top: auto;
+}
+
+.capitalize {
+  text-transform: capitalize;
+}
+
+.detailsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.detailsList li {
+  display: flex;
+  justify-content: space-between;
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.5;
+  margin-bottom: 16px;
+}
+
+.detailsList li:last-child {
+  margin-bottom: 0;
+}
+
+.detailsList li span:first-child {
+  color: var(--main);
+}

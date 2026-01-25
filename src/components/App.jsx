@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCampers } from "../redux/campers/operations";
@@ -8,6 +8,8 @@ import CatalogPage from "../pages/CatalogPage/CatalogPage";
 //import CamperPage from "../pages/CamperPage/CamperPage";
 import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 import CamperDetailsPage from "../pages/CamperDetailsPage/CamperDetailsPage";
+import CamperFeatures from "./CamperFeatures/CamperFeatures";
+import CamperReviews from "./CamperReviews/CamperReviews";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -21,7 +23,12 @@ const App = () => {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/catalog" element={<CatalogPage />} />
-        <Route path="/catalog/:id" element={<CamperDetailsPage />} />
+        <Route path="/catalog/:id" element={<CamperDetailsPage />}>
+          {/* redirect to features */}
+          <Route index element={<Navigate to="features" replace />} />
+          <Route path="features" element={<CamperFeatures />} />
+          <Route path="reviews" element={<CamperReviews />} />
+        </Route>
         <Route path="/icons" element={<MyIconsComponent />} />
         <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
