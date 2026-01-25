@@ -7,7 +7,7 @@ export const fetchCampers = createAsyncThunk(
   "campers/fetchAll",
   async (filters = {}, thunkAPI) => {
     try {
-      // Очищуємо порожні фільтри перед запитом
+      // clear filters
       const params = Object.entries(filters).reduce((acc, [key, value]) => {
         if (value !== "" && value !== false && value !== null) {
           acc[key] = value;
@@ -17,19 +17,13 @@ export const fetchCampers = createAsyncThunk(
 
       const response = await axios.get("/campers", { params });
 
-      console.log("params:", params);
-      console.log(response.data);
-
-      return response.data; // Очікуємо { total, items }
+      return response.data;
     } catch (error) {
-      // ОБРОБКА 404
-      // Якщо сервер каже "Not found", ми повертаємо порожній список,
-      // ніби це успішний запит, але без даних.
+      // handle error 404
+      // return empty items
       if (error.response && error.response.status === 404) {
         return { items: [], total: 0 };
       }
-
-      // Для інших помилок (500, мережа і т.д.) повертаємо помилку
       return thunkAPI.rejectWithValue(error.message);
     }
   },

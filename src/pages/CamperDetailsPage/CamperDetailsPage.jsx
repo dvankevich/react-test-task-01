@@ -32,7 +32,7 @@ const CamperDetailsPage = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Booking Data:", formData);
-    alert("Дякуємо! Ваша заявка на бронювання прийнята.");
+    alert("Thank you! Your booking request has been accepted.");
     setFormData({ name: "", email: "", bookingDate: "", comment: "" });
   };
 
@@ -41,7 +41,7 @@ const CamperDetailsPage = () => {
 
   return (
     <main className={styles.container}>
-      {/* Секція заголовку */}
+      {/* header */}
       <section className={styles.header}>
         <h1 className={styles.title}>{camper.name}</h1>
         <div className={styles.meta}>
@@ -59,7 +59,7 @@ const CamperDetailsPage = () => {
         <p className={styles.price}>€{camper.price.toFixed(2)}</p>
       </section>
 
-      {/* Галерея */}
+      {/* gallery */}
       <section className={styles.gallery}>
         {camper.gallery.map((img, index) => (
           <div key={index} className={styles.imageThumb}>
@@ -70,7 +70,7 @@ const CamperDetailsPage = () => {
 
       <p className={styles.description}>{camper.description}</p>
 
-      {/* Таби */}
+      {/* tabs */}
       <div className={styles.tabs}>
         <NavLink
           to="features"
@@ -87,12 +87,12 @@ const CamperDetailsPage = () => {
       </div>
 
       <div className={styles.layout}>
-        {/* ЛІВА ЧАСТИНА */}
+        {/* left */}
         <div className={styles.contentLeft}>
           <Outlet context={{ camper }} />
         </div>
 
-        {/* ПРАВА ЧАСТИНА (Sidebar) */}
+        {/* right */}
         <aside className={styles.bookingSidebar}>
           <div className={styles.bookingFormCard}>
             <h3>Book your campervan now</h3>

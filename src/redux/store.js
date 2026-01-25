@@ -17,7 +17,7 @@ import { favoritesReducer } from "./favorites/slice";
 const persistConfig = {
   key: "campers",
   storage,
-  whitelist: ["favorites"], // Зберігаємо тільки список обраного
+  whitelist: ["favorites"],
 };
 
 const rootReducer = combineReducers({
@@ -33,7 +33,6 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
-        // Ігноруємо системні екшени redux-persist, щоб не було помилок у консолі
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     }),
