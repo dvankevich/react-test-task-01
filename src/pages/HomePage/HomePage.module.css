@@ -1,12 +1,26 @@
 .hero {
   background-image: linear-gradient(rgba(16, 24, 40, 0.4), rgba(16, 24, 40, 0.4)),
     url('../../assets/images/Hero.jpg');
+
+  background-image: linear-gradient(rgba(16, 24, 40, 0.4), rgba(16, 24, 40, 0.4)),
+    image-set(url('../../assets/images/Hero.webp') 1x,
+      url('../../assets/images/Hero@2x.webp') 2x,
+      url('../../assets/images/Hero.jpg') 1x);
+
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   height: calc(100vh - 72px);
   display: flex;
   align-items: center;
+}
+
+@media (-webkit-min-device-pixel-ratio: 2),
+(min-resolution: 192dpi) {
+  .hero {
+    background-image: linear-gradient(rgba(16, 24, 40, 0.4), rgba(16, 24, 40, 0.4)),
+      url('../../assets/images/Hero@2x.webp');
+  }
 }
 
 .container {
