@@ -10,6 +10,7 @@ import MyIconsComponent from "./MyIconsComponent/MyIconsComponent";
 import CamperDetailsPage from "../pages/CamperDetailsPage/CamperDetailsPage";
 import CamperFeatures from "./CamperFeatures/CamperFeatures";
 import CamperReviews from "./CamperReviews/CamperReviews";
+import FavoritesPage from "../pages/FavoritesPage/FavoritesPage";
 
 const App = () => {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="reviews" element={<CamperReviews />} />
         </Route>
         <Route path="/icons" element={<MyIconsComponent />} />
+        <Route path="/favorites" element={<FavoritesPage />} />
         <Route path="*" element={<h2>Page not found</h2>} />
       </Routes>
     </>

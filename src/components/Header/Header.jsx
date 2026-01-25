@@ -25,6 +25,14 @@ const Header = () => {
         >
           Catalog
         </NavLink>
+        <NavLink
+          to="/favorites"
+          className={({ isActive }) =>
+            isActive ? styles.activeLink : styles.link
+          }
+        >
+          Favorites
+        </NavLink>
       </nav>
       <ThemeToggle />
     </header>
