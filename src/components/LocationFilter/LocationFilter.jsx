@@ -22,17 +22,13 @@ const LocationFilter = () => {
   const handleLocationChange = (e) => {
     const newLocation = e.target.value;
 
-    // 1. Записуємо в стейт фільтрів
     dispatch(setFilter({ location: newLocation }));
 
-    // 2. Формуємо оновлений об'єкт фільтрів для запиту
-    // (бо Redux state оновиться асинхронно, а нам треба актуальні дані прямо зараз)
     const updatedFilters = {
       ...filters,
       location: newLocation,
     };
 
-    // 3. Робимо запит (як у твоєму прикладі App.js)
     dispatch(fetchCampers(updatedFilters));
   };
 
@@ -46,7 +42,6 @@ const LocationFilter = () => {
           value={filters.location}
           onChange={handleLocationChange}
         >
-          {/* Пусте значення для вибору "Всі міста" */}
           <option value="">All locations</option>
           {cities.map((city) => (
             <option key={city} value={city}>
