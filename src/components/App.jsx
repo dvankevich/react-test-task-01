@@ -3,8 +3,8 @@ import { useEffect, Suspense, lazy } from "react";
 import { useDispatch } from "react-redux";
 import { fetchCampers } from "../redux/campers/operations";
 import Header from "./Header/Header";
+import HomePage from "../pages/HomePage/HomePage";
 
-const HomePage = lazy(() => import("../pages/HomePage/HomePage"));
 const CatalogPage = lazy(() => import("../pages/CatalogPage/CatalogPage"));
 const CamperDetailsPage = lazy(
   () => import("../pages/CamperDetailsPage/CamperDetailsPage"),
