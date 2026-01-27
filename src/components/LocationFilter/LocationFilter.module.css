@@ -13,100 +13,18 @@
 
 .inputWrapper {
   position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
+  /* Важливо для позиціонування іконки */
 }
 
+/* Іконка мапи */
 .inputIcon {
   position: absolute;
   left: 18px;
   top: 50%;
   transform: translateY(-50%);
   color: var(--main);
+  z-index: 5;
+  /* Щоб була поверх селекту */
   pointer-events: none;
-  z-index: 2;
-}
-
-.locationInput {
-  width: 100%;
-  padding: 18px 44px 18px 48px;
-  background-color: var(--inputs);
-  border: 1px solid transparent;
-  border-radius: 12px;
-  font-size: 16px;
-  color: var(--main);
-  outline: none;
-  transition: border-color 0.2s ease-in-out;
-}
-
-.locationInput:focus,
-.locationInput:hover {
-  border: 1px solid var(--button);
-}
-
-.chevron {
-  position: absolute;
-  right: 18px;
-  top: 50%;
-  transform: translateY(-50%);
-  cursor: pointer;
-  transition: transform 0.3s ease;
-  color: var(--main);
-  z-index: 2;
-}
-
-.chevronOpen {
-  transform: translateY(-50%) rotate(180deg);
-}
-
-.dropdown {
-  position: absolute;
-  top: calc(100% + 4px);
-  left: 0;
-  width: 100%;
-  background-color: #ffffff;
-  border: 1px solid var(--inputs);
-  border-radius: 12px;
-  box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.08);
-  list-style: none;
-  padding: 8px 0;
-  margin: 0;
-  max-height: 200px;
-  overflow-y: auto;
-  z-index: 1000;
-  scroll-behavior: smooth;
-}
-
-.dropdownItem {
-  padding: 12px 18px 12px 48px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  cursor: pointer;
-  color: var(--main);
-  font-size: 16px;
-  transition: background-color 0.2s ease;
-}
-
-.dropdownItem:hover,
-.activeItem {
-  background-color: var(--inputs);
-  color: var(--button);
-}
-
-.noResults {
-  padding: 12px 18px;
-  color: var(--text);
-  font-size: 14px;
-  text-align: center;
-}
-
-.dropdown::-webkit-scrollbar {
-  width: 6px;
-}
-
-.dropdown::-webkit-scrollbar-thumb {
-  background-color: var(--inputs);
-  border-radius: 10px;
+  /* Щоб клік проходив крізь іконку на селект */
 }

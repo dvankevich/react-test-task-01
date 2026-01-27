@@ -1,5 +1,5 @@
-import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import Select from "react-select"; // Імпортуємо бібліотеку
 import { Icon } from "@iconify/react";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
@@ -16,148 +16,98 @@ const cities = [
   "Sumy",
 ];
 
+// Перетворюємо масив рядків у формат, який розуміє react-select: { value, label }
+const options = cities.map((city) => ({ value: city, label: city }));
+
 const LocationFilter = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
 
-  const [inputValue, setInputValue] = useState(filters.location || "");
-  const [isOpen, setIsOpen] = useState(false);
-  const [isBrowsingAll, setIsBrowsingAll] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(-1);
-  const wrapperRef = useRef(null);
+  // Функція зміни значення
+  const handleChange = (selectedOption) => {
+    const value = selectedOption ? selectedOption.value : "";
 
-  const filteredCities =
-    isBrowsingAll || inputValue.trim() === ""
-      ? cities
-      : cities.filter((city) =>
-          city.toLowerCase().includes(inputValue.toLowerCase()),
-        );
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setIsOpen(false);
-        setIsBrowsingAll(false);
-        setActiveIndex(-1);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
-
-  const handleSelect = (city) => {
-    if (!city) return;
-    setInputValue(city);
-    setIsOpen(false);
-    setIsBrowsingAll(false);
-    setActiveIndex(-1);
-
-    dispatch(setFilter({ location: city }));
-    dispatch(fetchCampers({ ...filters, location: city }));
+    dispatch(setFilter({ location: value }));
+    dispatch(fetchCampers({ ...filters, location: value }));
   };
 
-  const handleInputChange = (e) => {
-    const value = e.target.value;
-    setInputValue(value);
-    setIsOpen(true);
-    setIsBrowsingAll(false);
-    setActiveIndex(-1);
-
-    if (value === "") {
-      dispatch(setFilter({ location: "" }));
-      dispatch(fetchCampers({ ...filters, location: "" }));
-    }
-  };
-
-  const toggleDropdown = () => {
-    if (!isOpen) {
-      setIsOpen(true);
-      setIsBrowsingAll(true);
-      setActiveIndex(-1);
-    } else {
-      setIsOpen(false);
-      setIsBrowsingAll(false);
-    }
-  };
-
-  const handleKeyDown = (e) => {
-    if (!isOpen) return;
-
-    switch (e.key) {
-      case "ArrowDown":
-        e.preventDefault();
-        setActiveIndex((prev) =>
-          prev < filteredCities.length - 1 ? prev + 1 : prev,
-        );
-        break;
-      case "ArrowUp":
-        e.preventDefault();
-        setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
-        break;
-      case "Enter":
-        if (activeIndex >= 0) {
-          handleSelect(filteredCities[activeIndex]);
-        }
-        break;
-      case "Escape":
-        setIsOpen(false);
-        setActiveIndex(-1);
-        break;
-      default:
-        break;
-    }
+  // Кастомні стилі для react-select, щоб він виглядав як ваш дизайн
+  const customStyles = {
+    control: (provided, state) => ({
+      ...provided,
+      backgroundColor: "var(--inputs)", // Ваш колір фону
+      borderRadius: "12px",
+      border: state.isFocused
+        ? "1px solid var(--button)"
+        : "1px solid transparent",
+      padding: "6px 0 6px 40px", // Відступ зліва для іконки мапи
+      boxShadow: "none", // Прибираємо стандартну тінь
+      cursor: "pointer",
+      "&:hover": {
+        border: "1px solid var(--button)",
+      },
+    }),
+    singleValue: (provided) => ({
+      ...provided,
+      color: "var(--main)", // Колір тексту
+      fontSize: "16px",
+    }),
+    placeholder: (provided) => ({
+      ...provided,
+      color: "var(--text)", // Колір плейсхолдера
+    }),
+    dropdownIndicator: (provided, state) => ({
+      ...provided,
+      color: "var(--main)",
+      transition: "transform 0.2s",
+      transform: state.selectProps.menuIsOpen ? "rotate(180deg)" : null,
+      paddingRight: "18px",
+    }),
+    indicatorSeparator: () => ({ display: "none" }), // Прибираємо паличку розділювач
+    menu: (provided) => ({
+      ...provided,
+      borderRadius: "12px",
+      marginTop: "4px",
+      boxShadow: "0px 4px 36px rgba(0, 0, 0, 0.08)",
+      zIndex: 100, // Щоб список був поверх усього
+    }),
+    option: (provided, state) => ({
+      ...provided,
+      backgroundColor: state.isFocused ? "var(--inputs)" : "white",
+      color: state.isFocused ? "var(--button)" : "var(--main)",
+      cursor: "pointer",
+      padding: "10px 20px",
+    }),
   };
 
   return (
-    <div className={styles.container} ref={wrapperRef}>
+    <div className={styles.container}>
       <p className={styles.label}>Location</p>
 
       <div className={styles.inputWrapper}>
+        {/* Ваша іконка мапи залишається тут, позиціонована абсолютно */}
         <Icon icon="bi:map" className={styles.inputIcon} width="20" />
 
-        <input
-          type="text"
-          className={styles.locationInput}
+        <Select
+          options={options}
+          styles={customStyles}
           placeholder="City, Ukraine"
-          value={inputValue}
-          onChange={handleInputChange}
-          onKeyDown={handleKeyDown}
-          onFocus={() => {
-            setIsOpen(true);
-            setIsBrowsingAll(true);
-            setActiveIndex(-1);
+          isClearable // Додає хрестик для очищення
+          value={options.find((opt) => opt.value === filters.location) || null} // Синхронізація з Redux
+          onChange={handleChange}
+          // Ці пропси вимикають зайві бордери самого інпуту всередині селекту
+          components={{
+            Input: (props) => (
+              <components.Input {...props} aria-label="Location" />
+            ),
           }}
         />
-
-        <Icon
-          icon="bi:chevron-down"
-          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
-          width="20"
-          onClick={toggleDropdown}
-        />
-
-        {isOpen && (
-          <ul className={styles.dropdown}>
-            {filteredCities.length > 0 ? (
-              filteredCities.map((city, index) => (
-                <li
-                  key={city}
-                  className={`${styles.dropdownItem} ${index === activeIndex ? styles.activeItem : ""}`}
-                  onClick={() => handleSelect(city)}
-                  onMouseEnter={() => setActiveIndex(index)}
-                >
-                  <Icon icon="bi:geo-alt" width="16" />
-                  {city}
-                </li>
-              ))
-            ) : (
-              <li className={styles.noResults}>No cities found</li>
-            )}
-          </ul>
-        )}
       </div>
     </div>
   );
 };
+
+// Невеликий хак, щоб мати доступ до components.Input, якщо треба (або видаліть components prop вище)
+import { components } from "react-select";
 
 export default LocationFilter;
