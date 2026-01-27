@@ -22,12 +22,12 @@ const LocationFilter = () => {
 
   const [inputValue, setInputValue] = useState(filters.location || "");
   const [isOpen, setIsOpen] = useState(false);
+  const [isBrowsingAll, setIsBrowsingAll] = useState(false);
+  const [activeIndex, setActiveIndex] = useState(-1);
   const wrapperRef = useRef(null);
 
-  // Логіка фільтрації: якщо нічого не введено - показуємо ВСІ міста.
-  // Якщо є текст - фільтруємо.
   const filteredCities =
-    inputValue.trim() === ""
+    isBrowsingAll || inputValue.trim() === ""
       ? cities
       : cities.filter((city) =>
           city.toLowerCase().includes(inputValue.toLowerCase()),
@@ -37,6 +37,8 @@ const LocationFilter = () => {
     const handleClickOutside = (event) => {
       if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
         setIsOpen(false);
+        setIsBrowsingAll(false);
+        setActiveIndex(-1);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -44,8 +46,11 @@ const LocationFilter = () => {
   }, []);
 
   const handleSelect = (city) => {
+    if (!city) return;
     setInputValue(city);
     setIsOpen(false);
+    setIsBrowsingAll(false);
+    setActiveIndex(-1);
 
     dispatch(setFilter({ location: city }));
     dispatch(fetchCampers({ ...filters, location: city }));
@@ -54,11 +59,52 @@ const LocationFilter = () => {
   const handleInputChange = (e) => {
     const value = e.target.value;
     setInputValue(value);
-    setIsOpen(true); // Відкриваємо список при друці
+    setIsOpen(true);
+    setIsBrowsingAll(false);
+    setActiveIndex(-1);
 
     if (value === "") {
       dispatch(setFilter({ location: "" }));
       dispatch(fetchCampers({ ...filters, location: "" }));
+    }
+  };
+
+  const toggleDropdown = () => {
+    if (!isOpen) {
+      setIsOpen(true);
+      setIsBrowsingAll(true);
+      setActiveIndex(-1);
+    } else {
+      setIsOpen(false);
+      setIsBrowsingAll(false);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (!isOpen) return;
+
+    switch (e.key) {
+      case "ArrowDown":
+        e.preventDefault();
+        setActiveIndex((prev) =>
+          prev < filteredCities.length - 1 ? prev + 1 : prev,
+        );
+        break;
+      case "ArrowUp":
+        e.preventDefault();
+        setActiveIndex((prev) => (prev > 0 ? prev - 1 : prev));
+        break;
+      case "Enter":
+        if (activeIndex >= 0) {
+          handleSelect(filteredCities[activeIndex]);
+        }
+        break;
+      case "Escape":
+        setIsOpen(false);
+        setActiveIndex(-1);
+        break;
+      default:
+        break;
     }
   };
 
@@ -67,7 +113,6 @@ const LocationFilter = () => {
       <p className={styles.label}>Location</p>
 
       <div className={styles.inputWrapper}>
-        {/* Іконка мапи зліва */}
         <Icon icon="bi:map" className={styles.inputIcon} width="20" />
 
         <input
@@ -76,26 +121,30 @@ const LocationFilter = () => {
           placeholder="City, Ukraine"
           value={inputValue}
           onChange={handleInputChange}
-          onFocus={() => setIsOpen(true)}
+          onKeyDown={handleKeyDown}
+          onFocus={() => {
+            setIsOpen(true);
+            setIsBrowsingAll(true);
+            setActiveIndex(-1);
+          }}
         />
 
-        {/* ОСЬ ВІН: Шеврон (стрілочка) справа */}
         <Icon
           icon="bi:chevron-down"
           className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
           width="20"
-          onClick={() => setIsOpen(!isOpen)}
+          onClick={toggleDropdown}
         />
 
-        {/* Список підказок */}
         {isOpen && (
           <ul className={styles.dropdown}>
             {filteredCities.length > 0 ? (
-              filteredCities.map((city) => (
+              filteredCities.map((city, index) => (
                 <li
                   key={city}
-                  className={styles.dropdownItem}
+                  className={`${styles.dropdownItem} ${index === activeIndex ? styles.activeItem : ""}`}
                   onClick={() => handleSelect(city)}
+                  onMouseEnter={() => setActiveIndex(index)}
                 >
                   <Icon icon="bi:geo-alt" width="16" />
                   {city}

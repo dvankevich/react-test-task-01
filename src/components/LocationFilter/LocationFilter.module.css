@@ -31,14 +31,12 @@
 .locationInput {
   width: 100%;
   padding: 18px 44px 18px 48px;
-  /* 48px зліва для мапи, 44px справа для шеврона */
   background-color: var(--inputs);
   border: 1px solid transparent;
   border-radius: 12px;
   font-size: 16px;
   color: var(--main);
   outline: none;
-  cursor: text;
   transition: border-color 0.2s ease-in-out;
 }
 
@@ -47,7 +45,6 @@
   border: 1px solid var(--button);
 }
 
-/* Іконка стрілочки (справа) */
 .chevron {
   position: absolute;
   right: 18px;
@@ -63,15 +60,12 @@
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* Випадаючий список під полем вводу */
 .dropdown {
   position: absolute;
   top: calc(100% + 4px);
-  /* Рівно під інпутом */
   left: 0;
   width: 100%;
   background-color: #ffffff;
-  /* Або var(--inputs), якщо дизайн темний */
   border: 1px solid var(--inputs);
   border-radius: 12px;
   box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.08);
@@ -79,16 +73,13 @@
   padding: 8px 0;
   margin: 0;
   max-height: 200px;
-  /* Прокрутка, якщо міст багато */
   overflow-y: auto;
   z-index: 1000;
-  /* Поверх іншого контенту */
+  scroll-behavior: smooth;
 }
 
-/* Елемент списку (місто) */
 .dropdownItem {
   padding: 12px 18px 12px 48px;
-  /* Відступ зліва 48px, щоб текст був під текстом інпуту */
   display: flex;
   align-items: center;
   gap: 8px;
@@ -98,12 +89,12 @@
   transition: background-color 0.2s ease;
 }
 
-.dropdownItem:hover {
+.dropdownItem:hover,
+.activeItem {
   background-color: var(--inputs);
   color: var(--button);
 }
 
-/* Повідомлення, коли нічого не знайдено */
 .noResults {
   padding: 12px 18px;
   color: var(--text);
@@ -111,7 +102,6 @@
   text-align: center;
 }
 
-/* Кастомізація скролбару всередині списку */
 .dropdown::-webkit-scrollbar {
   width: 6px;
 }
