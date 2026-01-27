@@ -1,3 +1,4 @@
+import { useState, useRef, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
 import { setFilter } from "../../redux/filters/slice";
@@ -19,36 +20,92 @@ const LocationFilter = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
 
-  const handleLocationChange = (e) => {
-    const newLocation = e.target.value;
+  const [inputValue, setInputValue] = useState(filters.location || "");
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef(null);
 
-    dispatch(setFilter({ location: newLocation }));
+  // Логіка фільтрації: якщо нічого не введено - показуємо ВСІ міста.
+  // Якщо є текст - фільтруємо.
+  const filteredCities =
+    inputValue.trim() === ""
+      ? cities
+      : cities.filter((city) =>
+          city.toLowerCase().includes(inputValue.toLowerCase()),
+        );
 
-    const updatedFilters = {
-      ...filters,
-      location: newLocation,
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
     };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
 
-    dispatch(fetchCampers(updatedFilters));
+  const handleSelect = (city) => {
+    setInputValue(city);
+    setIsOpen(false);
+
+    dispatch(setFilter({ location: city }));
+    dispatch(fetchCampers({ ...filters, location: city }));
+  };
+
+  const handleInputChange = (e) => {
+    const value = e.target.value;
+    setInputValue(value);
+    setIsOpen(true); // Відкриваємо список при друці
+
+    if (value === "") {
+      dispatch(setFilter({ location: "" }));
+      dispatch(fetchCampers({ ...filters, location: "" }));
+    }
   };
 
   return (
-    <div className={styles.container}>
-      <label className={styles.label}>Location</label>
+    <div className={styles.container} ref={wrapperRef}>
+      <p className={styles.label}>Location</p>
+
       <div className={styles.inputWrapper}>
+        {/* Іконка мапи зліва */}
         <Icon icon="bi:map" className={styles.inputIcon} width="20" />
-        <select
-          className={styles.locationSelect}
-          value={filters.location}
-          onChange={handleLocationChange}
-        >
-          <option value="">All locations</option>
-          {cities.map((city) => (
-            <option key={city} value={city}>
-              {city}
-            </option>
-          ))}
-        </select>
+
+        <input
+          type="text"
+          className={styles.locationInput}
+          placeholder="City, Ukraine"
+          value={inputValue}
+          onChange={handleInputChange}
+          onFocus={() => setIsOpen(true)}
+        />
+
+        {/* ОСЬ ВІН: Шеврон (стрілочка) справа */}
+        <Icon
+          icon="bi:chevron-down"
+          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : ""}`}
+          width="20"
+          onClick={() => setIsOpen(!isOpen)}
+        />
+
+        {/* Список підказок */}
+        {isOpen && (
+          <ul className={styles.dropdown}>
+            {filteredCities.length > 0 ? (
+              filteredCities.map((city) => (
+                <li
+                  key={city}
+                  className={styles.dropdownItem}
+                  onClick={() => handleSelect(city)}
+                >
+                  <Icon icon="bi:geo-alt" width="16" />
+                  {city}
+                </li>
+              ))
+            ) : (
+              <li className={styles.noResults}>No cities found</li>
+            )}
+          </ul>
+        )}
       </div>
     </div>
   );
