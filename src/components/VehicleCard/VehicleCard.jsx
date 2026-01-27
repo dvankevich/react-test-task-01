@@ -61,10 +61,17 @@ const VehicleCard = ({ camper }) => {
         </div>
 
         <div className={styles.infoRow}>
-          <span className={styles.rating}>
-            <Icon icon="bi:star-fill" color="var(--rating)" />
-            {camper.rating}({camper.reviews?.length || 0} Reviews)
-          </span>
+          <a
+            href={`/catalog/${camper.id}/reviews`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <span className={styles.rating}>
+              <Icon icon="bi:star-fill" color="var(--rating)" />
+              {camper.rating}({camper.reviews?.length || 0} Reviews)
+            </span>
+          </a>
+
           <span className={styles.location}>
             <Icon icon="bi:map" />
             {camper.location}
