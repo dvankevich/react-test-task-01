@@ -13,10 +13,9 @@
 
 .inputWrapper {
   position: relative;
-  /* Важливо для позиціонування іконки */
+  width: 100%;
 }
 
-/* Іконка мапи */
 .inputIcon {
   position: absolute;
   left: 18px;
@@ -24,7 +23,94 @@
   transform: translateY(-50%);
   color: var(--main);
   z-index: 5;
-  /* Щоб була поверх селекту */
   pointer-events: none;
-  /* Щоб клік проходив крізь іконку на селект */
+}
+
+/* --- React Select styles--- */
+
+.control {
+  border-radius: 12px;
+  padding: 6px 0 6px 44px;
+  background-color: var(--inputs);
+  border: 1px solid transparent;
+  box-shadow: none;
+  cursor: pointer;
+  transition: border-color 0.2s;
+  min-height: 56px;
+}
+
+.control:hover {
+  border-color: var(--button);
+}
+
+.controlFocused {
+  border-color: var(--button);
+  background-color: var(--white);
+}
+
+.singleValue {
+  color: var(--main);
+  font-size: 16px;
+  font-weight: 400;
+}
+
+.placeholder {
+  color: var(--text);
+  font-size: 16px;
+}
+
+.menu {
+  margin-top: 4px;
+  border-radius: 12px;
+  border: 1px solid var(--inputs);
+  box-shadow: 0px 4px 36px rgba(0, 0, 0, 0.08);
+  background-color: var(--white);
+  z-index: 100;
+  overflow: hidden;
+}
+
+.menuList {
+  padding: 0;
+}
+
+.menuList::-webkit-scrollbar {
+  width: 6px;
+}
+
+.menuList::-webkit-scrollbar-thumb {
+  background-color: var(--inputs);
+  border-radius: 10px;
+}
+
+.option {
+  padding: 10px 20px;
+  cursor: pointer;
+  color: var(--main);
+  font-size: 16px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.optionFocused {
+  background-color: var(--inputs);
+  color: var(--button);
+}
+
+.optionSelected {
+  background-color: var(--white);
+  color: var(--button);
+  font-weight: 500;
+}
+
+.dropdownIndicator {
+  color: var(--main);
+  padding-right: 18px;
+  transition: transform 0.2s ease;
+}
+
+.dropdownIndicatorOpen {
+  transform: rotate(180deg);
+}
+
+.indicatorSeparator {
+  display: none;
 }
