@@ -5,6 +5,8 @@ import { NavLink, Outlet } from "react-router-dom";
 import { Icon } from "@iconify/react";
 import { fetchCamperById } from "../../redux/campers/operations";
 import styles from "./CamperDetailsPage.module.css";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
@@ -12,6 +14,9 @@ const CamperDetailsPage = () => {
 
   const camper = useSelector((state) => state.campers.currentCamper);
   const isLoading = useSelector((state) => state.campers.isLoading);
+
+  const [open, setOpen] = useState(false);
+  const [index, setIndex] = useState(0);
 
   const [formData, setFormData] = useState({
     name: "",
@@ -38,6 +43,10 @@ const CamperDetailsPage = () => {
 
   if (isLoading || !camper)
     return <div className={styles.loading}>Loading...</div>;
+
+  const slides = camper.gallery
+    ? camper.gallery.map((img) => ({ src: img.original }))
+    : [];
 
   return (
     <>
@@ -69,9 +78,16 @@ const CamperDetailsPage = () => {
 
         {/* gallery */}
         <section className={styles.gallery}>
-          {camper.gallery.map((img, index) => (
-            <div key={index} className={styles.imageThumb}>
-              <img src={img.original} alt={`${camper.name} ${index}`} />
+          {camper.gallery.map((img, i) => (
+            <div
+              key={i}
+              className={styles.imageThumb}
+              onClick={() => {
+                setIndex(i);
+                setOpen(true);
+              }}
+            >
+              <img src={img.thumb} alt={`${camper.name} ${i}`} />
             </div>
           ))}
         </section>
@@ -148,6 +164,15 @@ const CamperDetailsPage = () => {
           </aside>
         </div>
       </main>
+
+      {/*  Lightbox */}
+      <Lightbox
+        open={open}
+        close={() => setOpen(false)}
+        index={index}
+        slides={slides}
+        on={{ view: ({ index: currentIndex }) => setIndex(currentIndex) }}
+      />
     </>
   );
 };

@@ -1,11 +1,9 @@
-/* Основний контейнер */
 .container {
   max-width: 1440px;
   margin: 0 auto;
   padding: 40px 64px;
 }
 
-/* Заголовок та мета-дані */
 .header {
   margin-bottom: 24px;
 }
@@ -40,7 +38,6 @@
   margin-bottom: 24px;
 }
 
-/* Галерея */
 .gallery {
   display: flex;
   gap: 16px;
@@ -53,6 +50,12 @@
   border-radius: 10px;
   overflow: hidden;
   flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.imageThumb:hover {
+  transform: scale(1.02);
 }
 
 .imageThumb img {
@@ -61,14 +64,12 @@
   object-fit: cover;
 }
 
-/* Опис */
 .description {
   color: var(--text);
   line-height: 1.5;
   margin-bottom: 44px;
 }
 
-/* Таби (Навігація) */
 .tabs {
   display: flex;
   gap: 40px;
@@ -91,24 +92,17 @@
   border-bottom-color: var(--button);
 }
 
-/* Сітка макету (Дві колонки) */
 .layout {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 64px;
   align-items: stretch;
-  /* Щоб ліва і права частини були однієї висоти */
 }
 
-/* Ліва частина (Outlet контейнер) */
 .contentLeft {
-  /* border-radius: 10px;
-  padding: 44px 52px;
-  background: var(--inputs); */
   height: 100%;
 }
 
-/* Права частина (Форма) */
 .bookingSidebar {
   height: 100%;
 }
@@ -149,7 +143,6 @@
   border: none;
   display: block;
   margin: 24px auto 0;
-  /* Центрування */
   padding: 16px 60px;
   border-radius: 200px;
   font-weight: 500;
@@ -169,7 +162,6 @@
 }
 
 
-/* Адаптивність */
 @media (max-width: 768px) {
   .layout {
     grid-template-columns: 1fr;
