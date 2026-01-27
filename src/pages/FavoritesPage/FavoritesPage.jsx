@@ -8,12 +8,15 @@ const FavoritesPage = () => {
   const favorites = useSelector(selectFavorites);
 
   return (
-    <div className={styles.wrapper}>
-      <VehicleList
-        items={favorites}
-        emptyMessage="Your favorites list is empty 💙"
-      />
-    </div>
+    <>
+      <title>Favorites</title>
+      <div className={styles.wrapper}>
+        <VehicleList
+          items={favorites}
+          emptyMessage="Your favorites list is empty 💙"
+        />
+      </div>
+    </>
   );
 };
 

@@ -162,6 +162,13 @@
   background-color: var(--button-hover);
 }
 
+.location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+
 /* Адаптивність */
 @media (max-width: 768px) {
   .layout {

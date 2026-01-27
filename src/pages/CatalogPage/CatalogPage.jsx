@@ -4,12 +4,15 @@ import styles from "./CatalogPage.module.css";
 
 const CatalogPage = () => {
   return (
-    <main className={styles.container}>
-      <FilterSidebar />
-      <section>
-        <CamperList />
-      </section>
-    </main>
+    <>
+      <title>Catalog</title>
+      <main className={styles.container}>
+        <FilterSidebar />
+        <section>
+          <CamperList />
+        </section>
+      </main>
+    </>
   );
 };
 

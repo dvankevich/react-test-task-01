@@ -40,106 +40,115 @@ const CamperDetailsPage = () => {
     return <div className={styles.loading}>Loading...</div>;
 
   return (
-    <main className={styles.container}>
-      {/* header */}
-      <section className={styles.header}>
-        <h1 className={styles.title}>{camper.name}</h1>
-        <div className={styles.meta}>
-          <div className={styles.rating}>
-            <Icon icon="bi:star-fill" className={styles.starIcon} />
-            <span>
-              {camper.rating} ({camper.reviews?.length} Reviews)
-            </span>
+    <>
+      <title>{camper.name}</title>
+      <main className={styles.container}>
+        {/* header */}
+        <section className={styles.header}>
+          <h1 className={styles.title}>{camper.name}</h1>
+          <div className={styles.meta}>
+            <NavLink
+              to="reviews"
+              className={({ isActive }) => (isActive ? styles.activeTab : "")}
+            >
+              <div className={styles.rating}>
+                <Icon icon="bi:star-fill" className={styles.starIcon} />
+                <span>
+                  {camper.rating} ({camper.reviews?.length} Reviews)
+                </span>
+              </div>
+            </NavLink>
+
+            <div className={styles.location}>
+              <Icon icon="bi:map" />
+              <span>{camper.location}</span>
+            </div>
           </div>
-          <div className={styles.location}>
-            <Icon icon="bi:map" />
-            <span>{camper.location}</span>
-          </div>
+          <p className={styles.price}>€{camper.price.toFixed(2)}</p>
+        </section>
+
+        {/* gallery */}
+        <section className={styles.gallery}>
+          {camper.gallery.map((img, index) => (
+            <div key={index} className={styles.imageThumb}>
+              <img src={img.original} alt={`${camper.name} ${index}`} />
+            </div>
+          ))}
+        </section>
+
+        <p className={styles.description}>{camper.description}</p>
+
+        {/* tabs */}
+        <div className={styles.tabs}>
+          <NavLink
+            to="features"
+            className={({ isActive }) => (isActive ? styles.activeTab : "")}
+          >
+            Features
+          </NavLink>
+          <NavLink
+            to="reviews"
+            className={({ isActive }) => (isActive ? styles.activeTab : "")}
+          >
+            Reviews
+          </NavLink>
         </div>
-        <p className={styles.price}>€{camper.price.toFixed(2)}</p>
-      </section>
 
-      {/* gallery */}
-      <section className={styles.gallery}>
-        {camper.gallery.map((img, index) => (
-          <div key={index} className={styles.imageThumb}>
-            <img src={img.original} alt={`${camper.name} ${index}`} />
+        <div className={styles.layout}>
+          {/* left */}
+          <div className={styles.contentLeft}>
+            <Outlet context={{ camper }} />
           </div>
-        ))}
-      </section>
 
-      <p className={styles.description}>{camper.description}</p>
-
-      {/* tabs */}
-      <div className={styles.tabs}>
-        <NavLink
-          to="features"
-          className={({ isActive }) => (isActive ? styles.activeTab : "")}
-        >
-          Features
-        </NavLink>
-        <NavLink
-          to="reviews"
-          className={({ isActive }) => (isActive ? styles.activeTab : "")}
-        >
-          Reviews
-        </NavLink>
-      </div>
-
-      <div className={styles.layout}>
-        {/* left */}
-        <div className={styles.contentLeft}>
-          <Outlet context={{ camper }} />
+          {/* right */}
+          <aside className={styles.bookingSidebar}>
+            <div className={styles.bookingFormCard}>
+              <h3>Book your campervan now</h3>
+              <p className={styles.formNote}>
+                Stay connected! We are always ready to help you.
+              </p>
+              <form className={styles.form} onSubmit={handleSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Name*"
+                  required
+                  value={formData.name}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="Email*"
+                  required
+                  value={formData.email}
+                  onChange={handleInputChange}
+                />
+                <input
+                  type="text"
+                  name="bookingDate"
+                  placeholder="Booking date*"
+                  required
+                  onFocus={(e) => (e.target.type = "date")}
+                  value={formData.bookingDate}
+                  onChange={handleInputChange}
+                />
+                <textarea
+                  name="comment"
+                  placeholder="Comment"
+                  rows="4"
+                  value={formData.comment}
+                  onChange={handleInputChange}
+                ></textarea>
+                <button type="submit" className={styles.sendBtn}>
+                  Send
+                </button>
+              </form>
+            </div>
+          </aside>
         </div>
-
-        {/* right */}
-        <aside className={styles.bookingSidebar}>
-          <div className={styles.bookingFormCard}>
-            <h3>Book your campervan now</h3>
-            <p className={styles.formNote}>
-              Stay connected! We are always ready to help you.
-            </p>
-            <form className={styles.form} onSubmit={handleSubmit}>
-              <input
-                type="text"
-                name="name"
-                placeholder="Name*"
-                required
-                value={formData.name}
-                onChange={handleInputChange}
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Email*"
-                required
-                value={formData.email}
-                onChange={handleInputChange}
-              />
-              <input
-                type="text"
-                name="bookingDate"
-                placeholder="Booking date*"
-                required
-                onFocus={(e) => (e.target.type = "date")}
-                value={formData.bookingDate}
-                onChange={handleInputChange}
-              />
-              <textarea
-                name="comment"
-                placeholder="Comment"
-                rows="4"
-                value={formData.comment}
-                onChange={handleInputChange}
-              ></textarea>
-              <button type="submit" className={styles.sendBtn}>
-                Send
-              </button>
-            </form>
-          </div>
-        </aside>
-      </div>
-    </main>
+      </main>
+    </>
   );
 };
 
