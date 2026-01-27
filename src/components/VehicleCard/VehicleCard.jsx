@@ -1,6 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Icon } from "@iconify/react";
-import { Link } from "react-router-dom";
 import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
@@ -95,9 +94,14 @@ const VehicleCard = ({ camper }) => {
           })}
         </div>
 
-        <Link to={`/catalog/${camper.id}`} className={styles.showMoreBtn}>
+        <a
+          href={`/catalog/${camper.id}`}
+          className={styles.showMoreBtn}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           Show more
-        </Link>
+        </a>
       </div>
     </div>
   );
