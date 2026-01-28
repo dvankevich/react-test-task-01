@@ -7,6 +7,11 @@ import { fetchCamperById } from "../../redux/campers/operations";
 import styles from "./CamperDetailsPage.module.css";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { registerLocale } from "react-datepicker";
+import { enGB } from "date-fns/locale/en-GB";
+registerLocale("en-GB", enGB);
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
@@ -48,6 +53,10 @@ const CamperDetailsPage = () => {
     ? camper.gallery.map((img) => ({ src: img.original }))
     : [];
 
+  const handleDateChange = (date) => {
+    setFormData((prev) => ({ ...prev, bookingDate: date }));
+  };
+
   return (
     <>
       <title>{camper.name}</title>
@@ -61,7 +70,6 @@ const CamperDetailsPage = () => {
               className={({ isActive }) => (isActive ? styles.activeTab : "")}
             >
               <div className={styles.rating}>
-                {/* Замінили Icon на Icons.StarFull */}
                 <Icons.StarFull
                   className={styles.starIcon}
                   style={{ color: "var(--rating)" }}
@@ -73,7 +81,6 @@ const CamperDetailsPage = () => {
             </NavLink>
 
             <div className={styles.location}>
-              {/* Замінили Icon на Icons.Map */}
               <Icons.Map />
               <span>{camper.location}</span>
             </div>
@@ -145,15 +152,19 @@ const CamperDetailsPage = () => {
                   value={formData.email}
                   onChange={handleInputChange}
                 />
-                <input
-                  type="text"
-                  name="bookingDate"
-                  placeholder="Booking date*"
-                  required
-                  onFocus={(e) => (e.target.type = "date")}
-                  value={formData.bookingDate}
-                  onChange={handleInputChange}
-                />
+                <div className={styles.datepickerWrapper}>
+                  <DatePicker
+                    selected={formData.bookingDate}
+                    onChange={handleDateChange}
+                    placeholderText="Booking date*"
+                    dateFormat="dd/MM/yyyy"
+                    minDate={new Date()}
+                    required
+                    calendarStartDay={1}
+                    className={styles.datepickerInput}
+                    calendarClassName={styles.customCalendar}
+                  />
+                </div>
                 <textarea
                   name="comment"
                   placeholder="Comment"

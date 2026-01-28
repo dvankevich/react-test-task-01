@@ -161,6 +161,76 @@
   gap: 4px;
 }
 
+/* Обгортка для позиціонування іконки або повної ширини */
+.datepickerWrapper {
+  width: 100%;
+}
+
+.datepickerInput {
+  width: 100%;
+  padding: 18px;
+  background-color: var(--inputs);
+  border: none;
+  border-radius: 12px;
+  font-size: 16px;
+  color: var(--main);
+  outline: none;
+}
+
+/* Кастомізація самого випадаючого вікна */
+:global(.react-datepicker) {
+  font-family: var(--font-family) !important;
+  border-radius: 12px !important;
+  border: 1px solid var(--text) !important;
+  padding: 10px;
+}
+
+/* Шапка календаря  */
+:global(.react-datepicker__header) {
+  background-color: var(--white) !important;
+  border-bottom: 1px solid var(--text) !important;
+  border-top-left-radius: 12px !important;
+  border-top-right-radius: 12px !important;
+}
+
+:global(.react-datepicker__current-month) {
+  font-weight: 600;
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+/* Назви днів (MON, TUE...) */
+:global(.react-datepicker__day-name) {
+  color: var(--gray);
+  font-weight: 500;
+  width: 2.5rem;
+}
+
+/* Самі числа */
+:global(.react-datepicker__day) {
+  width: 2.5rem;
+  line-height: 2.5rem;
+  border-radius: 50% !important;
+  /* Кругле виділення як на фото */
+}
+
+/* Обраний день (темно-сірий/синій як на фото) */
+:global(.react-datepicker__day--selected) {
+  background-color: var(--text) !important;
+  /* Колір з вашого фото */
+  color: var(--inputs) !important;
+}
+
+/* Ефект при наведенні */
+:global(.react-datepicker__day:hover) {
+  background-color: var(--badges) !important;
+  border-radius: 50% !important;
+}
+
+/* Дні інших місяців (сірі) */
+:global(.react-datepicker__day--outside-month) {
+  color: var(--gray-light) !important;
+}
 
 @media (max-width: 768px) {
   .layout {
