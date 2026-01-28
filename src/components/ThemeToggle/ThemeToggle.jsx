@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
+import IconMoonFill from "~icons/bi/moon-fill";
+import IconSunFill from "~icons/bi/sun-fill";
 import styles from "./ThemeToggle.module.css";
 
 const ThemeToggle = () => {
@@ -25,9 +26,9 @@ const ThemeToggle = () => {
     >
       <span className={styles.icon}>
         {theme === "light" ? (
-          <Icon icon="bi:moon-fill" width="20" height="20" />
+          <IconMoonFill width="20" height="20" />
         ) : (
-          <Icon icon="bi:sun-fill" width="20" height="20" />
+          <IconSunFill width="20" height="20" />
         )}
       </span>
     </button>
