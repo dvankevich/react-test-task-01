@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Icons } from "../Icons"; // Шлях до твого сервісу
+import { Icons } from "../Icons";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
 import { selectFilters } from "../../redux/selectors";
@@ -66,7 +66,7 @@ const FilterSidebar = () => {
                   ? filters.transmission === "automatic"
                   : !!filters[option.name];
 
-              const IconComponent = option.icon; // Створюємо змінну-компонент
+              const IconComponent = option.icon;
 
               return (
                 <button

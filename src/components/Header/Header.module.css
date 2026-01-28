@@ -38,3 +38,18 @@
   color: var(--button);
   font-weight: 500;
 }
+
+@media (max-width: 768px) {
+  .header {
+    padding: 0 20px;
+    height: auto;
+    padding: 15px 20px;
+    flex-direction: column;
+    /* Лого зверху, навігація знизу */
+    gap: 10px;
+  }
+
+  .nav {
+    gap: 15px;
+  }
+}

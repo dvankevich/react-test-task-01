@@ -6,7 +6,7 @@
   border-radius: 20px;
   background-color: var(--white);
   width: 100%;
-  max-width: 888px;
+
 }
 
 .imageWrapper {
@@ -135,4 +135,21 @@
 
 .showMoreBtn:hover {
   background-color: var(--button-hover);
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    height: 250px;
+  }
+
+  .description {
+    max-width: 100%;
+    white-space: normal;
+  }
 }

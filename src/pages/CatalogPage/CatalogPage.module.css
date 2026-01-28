@@ -16,6 +16,14 @@ main {
 @media (max-width: 1024px) {
   .container {
     grid-template-columns: 1fr;
-    padding: 20px;
+    /* Сайдбар стає над списком */
+    gap: 32px;
+    padding: 20px 32px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 20px 16px;
   }
 }

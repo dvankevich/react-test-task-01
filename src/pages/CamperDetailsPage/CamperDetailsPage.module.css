@@ -38,7 +38,7 @@
   margin-bottom: 24px;
 }
 
-.gallery {
+/* .gallery {
   display: flex;
   gap: 16px;
   margin-bottom: 28px;
@@ -52,6 +52,18 @@
   flex-shrink: 0;
   cursor: pointer;
   transition: transform 0.3s ease;
+} */
+
+.gallery {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  padding-bottom: 8px;
+}
+
+.imageThumb {
+  flex-shrink: 0;
+  width: 290px;
 }
 
 .imageThumb:hover {
@@ -327,11 +339,22 @@
 }
 
 @media (max-width: 768px) {
-  .layout {
-    grid-template-columns: 1fr;
+  .container {
+    padding: 20px 16px;
   }
 
-  .container {
-    padding: 20px;
+  .title,
+  .price {
+    font-size: 24px;
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .imageThumb {
+    width: 250px;
+    height: 200px;
   }
 }
