@@ -162,10 +162,15 @@
 }
 
 
-/* .datepickerWrapper {
+.datepickerWrapper {
   width: 100%;
   position: relative;
-} */
+}
+
+.datepickerWrapper :global(.react-datepicker-wrapper) {
+  width: 100%;
+  display: block;
+}
 
 .datepickerInput {
   width: 100%;
@@ -204,7 +209,8 @@
 
 .customCalendar :global(.react-datepicker__header) {
   background-color: var(--white) !important;
-  border-bottom: 1px solid var(--text) !important;
+  /* border-bottom: 1px solid var(--text) !important; */
+  border-bottom: none;
   border-top-left-radius: 12px !important;
   border-top-right-radius: 12px !important;
   padding-top: 0 !important;
@@ -213,7 +219,6 @@
 
 .customCalendar :global(.react-datepicker__current-month) {
   font-size: 20px !important;
-  /* Більший шрифт як на макеті */
   font-weight: 600 !important;
   color: var(--main) !important;
   margin-bottom: 16px !important;
@@ -221,14 +226,14 @@
 }
 
 .customCalendar :global(.react-datepicker__navigation) {
-  top: 24px !important;
+  top: 18px !important;
 }
 
 .customCalendar :global(.react-datepicker__navigation-icon::before) {
   border-color: var(--main) !important;
   border-width: 2px 2px 0 0 !important;
-  height: 8px !important;
-  width: 8px !important;
+  height: 14px !important;
+  width: 14px !important;
 }
 
 .customCalendar :global(.react-datepicker__navigation--previous) {
@@ -239,11 +244,13 @@
   right: 15px !important;
 }
 
-/* Рядок днів тижня (MON, TUE...) */
+/* (MON, TUE...) */
 .customCalendar :global(.react-datepicker__day-names) {
   display: flex;
   justify-content: space-between;
-  margin-top: 8px;
+  border-bottom: 1px solid var(--text) !important;
+  /* margin-top: 8px; */
+  padding-bottom: 12px;
 }
 
 .customCalendar :global(.react-datepicker__day-name) {
@@ -256,7 +263,6 @@
   text-transform: uppercase;
 }
 
-/* Сітка днів */
 .customCalendar :global(.react-datepicker__month) {
   margin: 0 !important;
   margin-top: 12px !important;
@@ -276,20 +282,20 @@
   line-height: 2.5rem !important;
   margin: 0 !important;
   border-radius: 50% !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
   font-weight: 400 !important;
   color: var(--main) !important;
   transition: background-color 0.2s, color 0.2s;
 }
 
-/* Ховер на дату */
+
 .customCalendar :global(.react-datepicker__day:hover) {
   background-color: var(--badges) !important;
   color: var(--main) !important;
   border-radius: 50% !important;
 }
 
-/* Обрана дата */
+
 .customCalendar :global(.react-datepicker__day--selected),
 .customCalendar :global(.react-datepicker__day--keyboard-selected) {
   background-color: var(--text) !important;

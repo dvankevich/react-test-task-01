@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { Icons } from "../../components/Icons";
 import { fetchCamperById } from "../../redux/campers/operations";
-import styles from "./CamperDetailsPage.module.css";
+
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import DatePicker from "react-datepicker";
@@ -12,6 +12,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import { registerLocale } from "react-datepicker";
 import { enGB } from "date-fns/locale/en-GB";
 registerLocale("en-GB", enGB);
+import styles from "./CamperDetailsPage.module.css";
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
