@@ -137,6 +137,85 @@
   background-color: var(--button-hover);
 }
 
+@media (max-width: 1024px) {
+  .card {
+    gap: 16px;
+    padding: 16px;
+  }
+
+  .imageWrapper {
+    width: 240px;
+    height: 260px;
+  }
+
+  .title,
+  .price {
+    font-size: 20px;
+  }
+
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+
+  .priceWrapper {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .description {
+    max-width: 100%;
+    white-space: normal;
+    /* "Магічна формула" для обмеження кількості рядків */
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    /* Для Safari/Chrome/старих версій */
+    line-clamp: 2;
+    overflow: hidden;
+  }
+
+  .infoRow {
+    margin-bottom: 16px;
+    font-size: 14px;
+  }
+
+  .category {
+    padding: 8px 12px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .card {
+    flex-direction: column;
+    padding: 16px;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    height: 250px;
+  }
+
+  .header {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+
+  .description {
+    .description {
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+    }
+  }
+
+  .showMoreBtn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
 @media (max-width: 768px) {
   .card {
     flex-direction: column;

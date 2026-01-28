@@ -3,6 +3,13 @@
   flex-direction: column;
   gap: 32px;
   width: 100%;
-  min-width: 888px;
-  /*  (1440 - 64*2 - 360 - 64) */
+  flex-grow: 1;
+
+}
+
+
+@media (max-width: 768px) {
+  .wrapper {
+    gap: 24px;
+  }
 }
