@@ -49,7 +49,6 @@ const VehicleCard = ({ camper }) => {
               className={styles.favoriteBtn}
               onClick={() => dispatch(toggleFavorite(camper))}
             >
-              {/* Динамічна зміна компонента іконки */}
               {isFavorite ? (
                 <Icons.HeartFill color="var(--button)" width="24" height="24" />
               ) : (
