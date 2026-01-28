@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { Icon } from "@iconify/react";
+import { Icons } from "../Icons"; // Наш сервіс
 import clsx from "clsx";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
@@ -34,7 +34,8 @@ const LocationFilter = () => {
       <p className={styles.label}>Location</p>
 
       <div className={styles.inputWrapper}>
-        <Icon icon="bi:map" className={styles.inputIcon} width="20" />
+        {/* Замінюємо <Icon /> на <Icons.Map /> */}
+        <Icons.Map className={styles.inputIcon} width="20" height="20" />
 
         <Select
           options={options}
@@ -42,7 +43,7 @@ const LocationFilter = () => {
           isClearable
           value={options.find((opt) => opt.value === filters.location) || null}
           onChange={handleChange}
-          unstyled // reset default stiles
+          unstyled
           classNames={{
             control: ({ isFocused }) =>
               clsx(styles.control, isFocused && styles.controlFocused),

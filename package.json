@@ -30,7 +30,6 @@
     "@iconify-json/lucide": "^1.2.87",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/solar": "^1.2.5",
-    "@iconify/react": "^6.0.2",
     "@svgr/core": "^8.1.0",
     "@svgr/plugin-jsx": "^8.1.0",
     "@types/react": "^19.2.5",

@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Icon } from "@iconify/react";
+import { Icons } from "../Icons"; // Наш сервіс
 import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
@@ -9,30 +9,29 @@ const VehicleCard = ({ camper }) => {
   const favorites = useSelector(selectFavorites);
 
   const isFavorite = favorites.some((fav) => fav.id === camper.id);
-
   const formattedPrice = `€${camper.price.toFixed(2)}`;
 
+  // Оновлений список із посиланнями на компоненти
   const allFeatures = [
-    { key: "transmission", icon: "bi:diagram-3", label: (c) => c.transmission },
-    { key: "engine", icon: "bi:fuel-pump", label: (c) => c.engine },
-    { key: "AC", icon: "bi:wind", label: () => "AC" },
-    { key: "bathroom", icon: "ph:shower", label: () => "Bathroom" },
-    { key: "kitchen", icon: "bi:cup-hot", label: () => "Kitchen" },
-    { key: "TV", icon: "bi:tv", label: () => "TV" },
-    { key: "radio", icon: "bi:ui-radios", label: () => "Radio" },
     {
-      key: "refrigerator",
-      icon: "lucide:refrigerator",
-      label: () => "Refrigerator",
+      key: "transmission",
+      icon: Icons.Transmission,
+      label: (c) => c.transmission,
     },
-    { key: "microwave", icon: "lucide:microwave", label: () => "Microwave" },
-    { key: "gas", icon: "hugeicons:gas-stove", label: () => "Gas" },
-    { key: "water", icon: "ion:water-outline", label: () => "Water" },
+    { key: "engine", icon: Icons.Engine, label: (c) => c.engine },
+    { key: "AC", icon: Icons.AC, label: () => "AC" },
+    { key: "bathroom", icon: Icons.Bathroom, label: () => "Bathroom" },
+    { key: "kitchen", icon: Icons.Kitchen, label: () => "Kitchen" },
+    { key: "TV", icon: Icons.TV, label: () => "TV" },
+    { key: "radio", icon: Icons.Radio, label: () => "Radio" },
+    { key: "refrigerator", icon: Icons.Fridge, label: () => "Refrigerator" },
+    { key: "microwave", icon: Icons.Microwave, label: () => "Microwave" },
+    { key: "gas", icon: Icons.Gas, label: () => "Gas" },
+    { key: "water", icon: Icons.Water, label: () => "Water" },
   ];
 
   return (
     <div className={styles.card}>
-      {/* Фото */}
       <div className={styles.imageWrapper}>
         <img
           src={camper.gallery[0]?.thumb}
@@ -41,7 +40,6 @@ const VehicleCard = ({ camper }) => {
         />
       </div>
 
-      {/* Контент */}
       <div className={styles.content}>
         <div className={styles.header}>
           <h2 className={styles.title}>{camper.name}</h2>
@@ -51,11 +49,12 @@ const VehicleCard = ({ camper }) => {
               className={styles.favoriteBtn}
               onClick={() => dispatch(toggleFavorite(camper))}
             >
-              <Icon
-                icon={isFavorite ? "bi:heart-fill" : "bi:heart"}
-                color={isFavorite ? "var(--button)" : "var(--main)"}
-                width="24"
-              />
+              {/* Динамічна зміна компонента іконки */}
+              {isFavorite ? (
+                <Icons.HeartFill color="var(--button)" width="24" height="24" />
+              ) : (
+                <Icons.Heart color="var(--main)" width="24" height="24" />
+              )}
             </button>
           </div>
         </div>
@@ -67,20 +66,19 @@ const VehicleCard = ({ camper }) => {
             rel="noopener noreferrer"
           >
             <span className={styles.rating}>
-              <Icon icon="bi:star-fill" color="var(--rating)" />
+              <Icons.StarFull color="var(--rating)" />
               {camper.rating}({camper.reviews?.length || 0} Reviews)
             </span>
           </a>
 
           <span className={styles.location}>
-            <Icon icon="bi:map" />
+            <Icons.Map />
             {camper.location}
           </span>
         </div>
 
         <p className={styles.description}>{camper.description}</p>
 
-        {/* Категорії/Бейджи */}
         <div className={styles.categories}>
           {allFeatures.map((feature) => {
             const isVisible =
@@ -90,9 +88,11 @@ const VehicleCard = ({ camper }) => {
 
             if (!isVisible) return null;
 
+            const IconComponent = feature.icon;
+
             return (
               <div key={feature.key} className={styles.category}>
-                <Icon icon={feature.icon} />
+                <IconComponent />
                 <span className={styles.capitalize}>
                   {feature.label(camper)}
                 </span>

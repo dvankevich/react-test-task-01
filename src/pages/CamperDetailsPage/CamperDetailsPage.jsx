@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
-import { Icon } from "@iconify/react";
+import { Icons } from "../../components/Icons";
 import { fetchCamperById } from "../../redux/campers/operations";
 import styles from "./CamperDetailsPage.module.css";
 import Lightbox from "yet-another-react-lightbox";
@@ -61,7 +61,11 @@ const CamperDetailsPage = () => {
               className={({ isActive }) => (isActive ? styles.activeTab : "")}
             >
               <div className={styles.rating}>
-                <Icon icon="bi:star-fill" className={styles.starIcon} />
+                {/* Замінили Icon на Icons.StarFull */}
+                <Icons.StarFull
+                  className={styles.starIcon}
+                  style={{ color: "var(--rating)" }}
+                />
                 <span>
                   {camper.rating} ({camper.reviews?.length} Reviews)
                 </span>
@@ -69,7 +73,8 @@ const CamperDetailsPage = () => {
             </NavLink>
 
             <div className={styles.location}>
-              <Icon icon="bi:map" />
+              {/* Замінили Icon на Icons.Map */}
+              <Icons.Map />
               <span>{camper.location}</span>
             </div>
           </div>
@@ -165,7 +170,7 @@ const CamperDetailsPage = () => {
         </div>
       </main>
 
-      {/*  Lightbox */}
+      {/* Lightbox */}
       <Lightbox
         open={open}
         close={() => setOpen(false)}

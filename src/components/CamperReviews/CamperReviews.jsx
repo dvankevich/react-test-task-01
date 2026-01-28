@@ -1,5 +1,5 @@
 import { useOutletContext } from "react-router-dom";
-import { Icon } from "@iconify/react";
+import { Icons } from "../Icons";
 import styles from "./CamperReviews.module.css";
 
 const CamperReviews = () => {
@@ -10,17 +10,23 @@ const CamperReviews = () => {
       {camper.reviews.map((rev, i) => (
         <div key={i} className={styles.reviewCard}>
           <div className={styles.reviewHeader}>
-            <div className={styles.avatar}>{rev.reviewer_name[0]}</div>
+            <div className={styles.avatar}>
+              {rev.reviewer_name ? rev.reviewer_name[0] : "?"}
+            </div>
             <div>
               <p className={styles.reviewerName}>{rev.reviewer_name}</p>
               <div className={styles.stars}>
+                {/* Створюємо масив із 5 зірок */}
                 {[...Array(5)].map((_, s) => (
-                  <Icon
+                  <Icons.StarFull
                     key={s}
-                    icon="bi:star-fill"
-                    color={
-                      s < rev.reviewer_rating ? "#FFC531" : "var(--badges)"
-                    }
+                    // Динамічно змінюємо колір через style
+                    style={{
+                      color:
+                        s < rev.reviewer_rating ? "#FFC531" : "var(--badges)",
+                    }}
+                    width="16" // Можеш налаштувати потрібний розмір
+                    height="16"
                   />
                 ))}
               </div>
@@ -32,4 +38,5 @@ const CamperReviews = () => {
     </div>
   );
 };
+
 export default CamperReviews;
