@@ -113,55 +113,45 @@
   width: fit-content;
 }
 
-/* @media (max-width: 1024px) {
+@media (max-width: 1200px) {
+
   .sidebar {
     max-width: 100%;
   }
-} */
+
+  .searchBtn {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
 
 @media (max-width: 768px) {
-  .searchButton {
+
+  .searchBtn {
     width: 100%;
-    /* На мобільних — на всю ширину сайдбару */
-    margin-top: 32px;
+    margin-top: 0;
   }
 }
 
 @media (max-width: 480px) {
-  .filtersGroup {
-    display: grid;
-    /* Створюємо 3 рівні колонки, які підлаштовуються під ширину екрана */
-    grid-template-columns: repeat(3, 1fr);
-    gap: 8px;
-  }
+
 
   .filterItem {
-    /* Прибираємо фіксовану ширину, щоб grid керував розміром */
     width: 100%;
     height: 80px;
-    /* Трохи зменшуємо висоту */
     padding: 8px 4px;
     gap: 4px;
   }
 
-  /* Зменшуємо розмір іконок всередині кнопок */
   .filterItem svg {
     width: 24px;
     height: 24px;
   }
 
-  /* Зменшуємо шрифт тексту під іконкою */
   .filterItem span,
   .filterItem p {
     font-size: 12px;
     text-align: center;
     line-height: 1.2;
-  }
-}
-
-/* Для дуже маленьких екранів (менше 360px) робимо 2 колонки */
-@media (max-width: 360px) {
-  .filtersGroup {
-    grid-template-columns: repeat(2, 1fr);
   }
 }
