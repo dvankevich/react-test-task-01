@@ -1,15 +1,15 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react-swc'
-import Icons from 'unplugin-icons/vite'
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react-swc";
+import Icons from "unplugin-icons/vite";
+import cssInjectedByJsPlugin from "vite-plugin-css-injected-by-js";
 
 export default defineConfig({
   plugins: [
     react(),
     Icons({
-      compiler: 'jsx',          // для React
-      autoInstall: true,        // автоматично підтягує @iconify-json/* при потребі
-      // scale: 1.2,            // опціонально: масштаб за замовчуванням
-      // customCollections: {}, // якщо будуть кастомні іконки
+      compiler: "jsx",
+      autoInstall: true,
     }),
+    cssInjectedByJsPlugin(),
   ],
-})
+});
