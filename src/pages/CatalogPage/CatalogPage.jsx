@@ -1,5 +1,4 @@
 import FilterSidebar from "../../components/FilterSidebar/FilterSidebar";
-//import CamperList from "../../components/CamperList/CamperList";
 import styles from "./CatalogPage.module.css";
 import VehicleList from "../../components/VehicleList/VehicleList";
 import { useSelector } from "react-redux";
@@ -15,8 +14,6 @@ const CatalogPage = () => {
       <main className={styles.container}>
         <FilterSidebar />
         <section>
-          {/* <CamperList /> */}
-
           <VehicleList
             items={campers}
             isLoading={isLoading}
