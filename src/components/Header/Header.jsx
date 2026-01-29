@@ -8,7 +8,7 @@ const Header = () => {
       <div className={styles.logo}>
         Travel<span>Trucks</span>
       </div>
-      <nav className={styles.nav}>
+      <nav className={styles.nav} aria-label="Main navigation">
         <NavLink
           to="/"
           className={({ isActive }) =>
