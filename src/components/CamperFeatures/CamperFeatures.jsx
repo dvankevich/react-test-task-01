@@ -34,12 +34,10 @@ const CamperFeatures = () => {
 
           if (!isVisible) return null;
 
-          // Отримуємо компонент іконки з конфігу
           const IconComponent = item.icon;
 
           return (
             <div key={item.key} className={styles.badge}>
-              {/* Рендеримо як звичайний компонент */}
               <IconComponent width="20" height="20" />
               <span className={styles.capitalize}>{item.label(camper)}</span>
             </div>

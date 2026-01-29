@@ -23,6 +23,16 @@
   gap: 8px;
 }
 
+[data-theme="dark"] .badge {
+  mix-blend-mode: normal;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .badge {
+    mix-blend-mode: normal;
+  }
+}
+
 .subTitle {
   font-size: 20px;
   font-weight: 600;
