@@ -13,7 +13,7 @@ const CatalogPage = () => {
       <title>Catalog</title>
       <main className={styles.container}>
         <FilterSidebar />
-        <section>
+        <section className={styles.catalogSection}>
           <VehicleList
             items={campers}
             isLoading={isLoading}

@@ -7,6 +7,13 @@
   align-items: start;
 }
 
+.catalogSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+}
+
 main {
   width: 100%;
   flex-grow: 1;
