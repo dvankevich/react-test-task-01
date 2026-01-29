@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
-import { Icons } from "../Icons"; // Наш сервіс
+import { Icons } from "../Icons";
 import clsx from "clsx";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
@@ -34,7 +34,6 @@ const LocationFilter = () => {
       <p className={styles.label}>Location</p>
 
       <div className={styles.inputWrapper}>
-        {/* Замінюємо <Icon /> на <Icons.Map /> */}
         <Icons.Map className={styles.inputIcon} width="20" height="20" />
 
         <Select

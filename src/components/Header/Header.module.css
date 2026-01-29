@@ -45,7 +45,6 @@
     height: auto;
     padding: 15px 20px;
     flex-direction: column;
-    /* Лого зверху, навігація знизу */
     gap: 10px;
   }
 

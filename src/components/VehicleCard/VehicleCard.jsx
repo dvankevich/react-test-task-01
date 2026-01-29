@@ -1,5 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
-import { Icons } from "../Icons"; // Наш сервіс
+import { Icons } from "../Icons";
 import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
@@ -11,7 +11,6 @@ const VehicleCard = ({ camper }) => {
   const isFavorite = favorites.some((fav) => fav.id === camper.id);
   const formattedPrice = `€${camper.price.toFixed(2)}`;
 
-  // Оновлений список із посиланнями на компоненти
   const allFeatures = [
     {
       key: "transmission",

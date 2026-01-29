@@ -8,7 +8,7 @@
   font-style: normal;
 }
 
-/* 1. Світла тема (дефолт) */
+/* light theme */
 :root {
   --font-family: "Inter", sans-serif;
   --main: #101828;
@@ -25,7 +25,7 @@
   color-scheme: light;
 }
 
-/* 2. Набір кольорів для темної теми (створюємо перевизначення) */
+/* reassign colors for dark theme */
 [data-theme="dark"] {
   --white: #101828;
   --main: #f9fafb;
@@ -36,10 +36,9 @@
   color-scheme: dark;
 }
 
-/* 3. Автоматичне включення, ЯКЩО користувач не обрав тему вручну */
+/* Automatically enabled IF the user has not selected a theme manually */
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
-    /* Копіюємо сюди логіку з [data-theme="dark"] */
     --white: #101828;
     --main: #f9fafb;
     --text: #98a2b3;
@@ -93,7 +92,6 @@ img {
 
 html {
   scrollbar-gutter: stable;
-  /*  overflow-y: scroll; */
 }
 
 html,

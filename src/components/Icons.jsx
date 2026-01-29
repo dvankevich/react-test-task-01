@@ -22,16 +22,13 @@ import IconGrid3x3 from "~icons/bi/grid-3x3-gap";
 import IconHeartFill from "~icons/bi/heart-fill";
 
 export const Icons = {
-  // Навігація та загальні
   Map: IconMap,
   Display: IconDisplay,
 
-  // Типи кузова (Використовуються у FilterSidebar)
   Van: IconGrid1x2,
   FullyIntegrated: IconGrid,
   Alcove: IconGrid3x3,
 
-  // Особливості кемпера (Features)
   Transmission: IconDiagram3,
   Engine: IconFuelPump,
   AC: IconWind,
@@ -40,16 +37,14 @@ export const Icons = {
   TV: IconTv,
   Radio: IconUiRadios,
 
-  // Побутова техніка
   Fridge: IconFridge,
   Microwave: IconMicrowave,
 
   Gas: IconGasStove,
-  Stove: IconGasStove, // Залишив Stove про всяк випадок для інших місць
+  Stove: IconGasStove,
 
   Water: IconWater,
 
-  // Тема та UI
   Moon: IconMoon,
   Sun: IconSun,
   Heart: IconHeart,

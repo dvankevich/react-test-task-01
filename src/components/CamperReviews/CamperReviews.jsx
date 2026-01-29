@@ -16,16 +16,16 @@ const CamperReviews = () => {
             <div>
               <p className={styles.reviewerName}>{rev.reviewer_name}</p>
               <div className={styles.stars}>
-                {/* Створюємо масив із 5 зірок */}
                 {[...Array(5)].map((_, s) => (
                   <Icons.StarFull
                     key={s}
-                    // Динамічно змінюємо колір через style
                     style={{
                       color:
-                        s < rev.reviewer_rating ? "#FFC531" : "var(--badges)",
+                        s < rev.reviewer_rating
+                          ? "var(--rating)"
+                          : "var(--badges)",
                     }}
-                    width="16" // Можеш налаштувати потрібний розмір
+                    width="16"
                     height="16"
                   />
                 ))}
