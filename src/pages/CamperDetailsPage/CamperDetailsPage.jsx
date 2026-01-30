@@ -51,7 +51,10 @@ const CamperDetailsPage = () => {
     return <div className={styles.loading}>Loading...</div>;
 
   const slides = camper.gallery
-    ? camper.gallery.map((img) => ({ src: img.original }))
+    ? camper.gallery.map((img) => ({
+        src: img.original,
+        alt: `${camper.name} full view`,
+      }))
     : [];
 
   const handleDateChange = (date) => {
@@ -69,11 +72,13 @@ const CamperDetailsPage = () => {
             <NavLink
               to="reviews"
               className={({ isActive }) => (isActive ? styles.activeTab : "")}
+              aria-label={`View ${camper.reviews?.length} reviews`}
             >
               <div className={styles.rating}>
                 <Icons.StarFull
                   className={styles.starIcon}
                   style={{ color: "var(--rating)" }}
+                  aria-hidden="true"
                 />
                 <span>
                   {camper.rating} ({camper.reviews?.length} Reviews)
@@ -82,7 +87,7 @@ const CamperDetailsPage = () => {
             </NavLink>
 
             <div className={styles.location}>
-              <Icons.Map />
+              <Icons.Map aria-hidden="true" />
               <span>{camper.location}</span>
             </div>
           </div>
@@ -99,8 +104,9 @@ const CamperDetailsPage = () => {
                 setIndex(i);
                 setOpen(true);
               }}
+              aria-label={`Open photo ${i + 1} of ${camper.name}`}
             >
-              <img src={img.thumb} alt={`${camper.name} ${i}`} />
+              <img src={img.thumb} alt={`${camper.name} preview ${i + 1}`} />
             </div>
           ))}
         </section>
@@ -108,15 +114,17 @@ const CamperDetailsPage = () => {
         <p className={styles.description}>{camper.description}</p>
 
         {/* tabs */}
-        <div className={styles.tabs}>
+        <div className={styles.tabs} role="tablist">
           <NavLink
             to="features"
+            role="tab"
             className={({ isActive }) => (isActive ? styles.activeTab : "")}
           >
             Features
           </NavLink>
           <NavLink
             to="reviews"
+            role="tab"
             className={({ isActive }) => (isActive ? styles.activeTab : "")}
           >
             Reviews
@@ -141,6 +149,7 @@ const CamperDetailsPage = () => {
                   type="text"
                   name="name"
                   placeholder="Name*"
+                  aria-label="Full Name"
                   required
                   value={formData.name}
                   onChange={handleInputChange}
@@ -149,6 +158,7 @@ const CamperDetailsPage = () => {
                   type="email"
                   name="email"
                   placeholder="Email*"
+                  aria-label="Email Address"
                   required
                   value={formData.email}
                   onChange={handleInputChange}
@@ -158,6 +168,7 @@ const CamperDetailsPage = () => {
                     selected={formData.bookingDate}
                     onChange={handleDateChange}
                     placeholderText="Booking date*"
+                    ariaLabelledBy="booking-date-label"
                     dateFormat="dd/MM/yyyy"
                     minDate={new Date()}
                     required
@@ -169,11 +180,16 @@ const CamperDetailsPage = () => {
                 <textarea
                   name="comment"
                   placeholder="Comment"
+                  aria-label="Your comment"
                   rows="4"
                   value={formData.comment}
                   onChange={handleInputChange}
                 ></textarea>
-                <button type="submit" className={styles.sendBtn}>
+                <button
+                  type="submit"
+                  className={styles.sendBtn}
+                  aria-label="Send booking request"
+                >
                   Send
                 </button>
               </form>
