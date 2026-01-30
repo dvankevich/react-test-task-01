@@ -5,18 +5,7 @@ import { fetchCampers } from "../../redux/campers/operations";
 import { selectFilters } from "../../redux/selectors";
 import LocationFilter from "../LocationFilter/LocationFilter";
 import styles from "./FilterSidebar.module.css";
-
-const equipmentOptions = [
-  { name: "AC", icon: Icons.AC, label: "AC" },
-  { name: "transmission", icon: Icons.Transmission, label: "Automatic" },
-  { name: "kitchen", icon: Icons.Kitchen, label: "Kitchen" },
-  { name: "TV", icon: Icons.Display, label: "TV" },
-  { name: "bathroom", icon: Icons.Bathroom, label: "Bathroom" },
-  { name: "refrigerator", icon: Icons.Fridge, label: "Refrigerator" },
-  { name: "microwave", icon: Icons.Microwave, label: "Microwave" },
-  { name: "gas", icon: Icons.Gas, label: "Gas" },
-  { name: "water", icon: Icons.Water, label: "Water" },
-];
+import { equipmentOptions } from "../../constants/features";
 
 const typeOptions = [
   { value: "panelTruck", icon: Icons.Van, label: "Van" },
