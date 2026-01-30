@@ -44,6 +44,7 @@
     "eslint-plugin-react-refresh": "^0.4.24",
     "globals": "^16.5.0",
     "lucide-react": "^0.563.0",
+    "prettier": "3.8.1",
     "prettier-eslint": "^1.0.1",
     "unplugin-icons": "^23.0.1",
     "vite": "^7.2.4",
