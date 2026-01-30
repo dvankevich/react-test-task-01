@@ -72,10 +72,12 @@ const FilterSidebar = () => {
                 <button
                   key={option.name}
                   type="button"
+                  aria-pressed={isActive}
+                  aria-label={`Filter by ${option.label}`}
                   className={`${styles.filterItem} ${isActive ? styles.filterItemActive : ""}`}
                   onClick={() => handleEquipmentToggle(option.name)}
                 >
-                  <IconComponent width="32" height="32" />
+                  <IconComponent width="32" height="32" aria-hidden="true" />
                   <span className={styles.filterLabel}>{option.label}</span>
                 </button>
               );

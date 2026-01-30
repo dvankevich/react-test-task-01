@@ -45,6 +45,7 @@ const VehicleList = ({
         <button
           className={styles.loadMoreBtn}
           onClick={() => setVisibleCount((prev) => prev + 4)}
+          aria-label="Load more campers"
         >
           Load more
         </button>
