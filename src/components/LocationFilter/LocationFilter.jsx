@@ -31,12 +31,17 @@ const LocationFilter = () => {
 
   return (
     <div className={styles.container}>
-      <p className={styles.label}>Location</p>
+      <label className={styles.label} htmlFor="location-select">
+        Location
+      </label>
 
       <div className={styles.inputWrapper}>
         <Icons.Map className={styles.inputIcon} width="20" height="20" />
 
         <Select
+          id="location-select"
+          instanceId="location-select"
+          aria-label="Select city"
           options={options}
           placeholder="City, Ukraine"
           isClearable
