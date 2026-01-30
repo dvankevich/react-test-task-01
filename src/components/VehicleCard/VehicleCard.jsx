@@ -32,6 +32,9 @@ const VehicleCard = ({ camper }) => {
             <button
               className={styles.favoriteBtn}
               onClick={() => dispatch(toggleFavorite(camper))}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
             >
               {isFavorite ? (
                 <Icons.HeartFill color="var(--button)" width="24" height="24" />
@@ -47,9 +50,10 @@ const VehicleCard = ({ camper }) => {
             href={`/catalog/${camper.id}/reviews`}
             target="_blank"
             rel="noopener noreferrer"
+            aria-label={`View ${camper.reviews?.length} reviews`}
           >
             <span className={styles.rating}>
-              <Icons.StarFull color="var(--rating)" />
+              <Icons.StarFull color="var(--rating)" aria-hidden="true" />
               {camper.rating}({camper.reviews?.length || 0} Reviews)
             </span>
           </a>
