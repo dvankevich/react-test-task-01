@@ -1,24 +1,6 @@
 import { useOutletContext } from "react-router-dom";
-import { Icons } from "../Icons";
 import styles from "./CamperFeatures.module.css";
-
-const featureConfig = [
-  {
-    key: "transmission",
-    icon: Icons.Transmission,
-    label: (c) => c.transmission,
-  },
-  { key: "engine", icon: Icons.Engine, label: (c) => c.engine },
-  { key: "AC", icon: Icons.AC, label: () => "AC" },
-  { key: "bathroom", icon: Icons.Bathroom, label: () => "Bathroom" },
-  { key: "kitchen", icon: Icons.Kitchen, label: () => "Kitchen" },
-  { key: "TV", icon: Icons.TV, label: () => "TV" },
-  { key: "radio", icon: Icons.Radio, label: () => "Radio" },
-  { key: "refrigerator", icon: Icons.Fridge, label: () => "Refrigerator" },
-  { key: "microwave", icon: Icons.Microwave, label: () => "Microwave" },
-  { key: "gas", icon: Icons.Gas, label: () => "Gas" },
-  { key: "water", icon: Icons.Water, label: () => "Water" },
-];
+import { featureConfig } from "../../constants/features";
 
 const CamperFeatures = () => {
   const { camper } = useOutletContext();
