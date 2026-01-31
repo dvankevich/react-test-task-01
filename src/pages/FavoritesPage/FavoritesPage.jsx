@@ -3,13 +3,17 @@ import { useSelector } from "react-redux";
 import { selectFavorites } from "../../redux/selectors";
 import VehicleList from "../../components/VehicleList/VehicleList";
 import styles from "./FavoritesPage.module.css";
+import SEO from "../../components/SEO/SEO";
 
 const FavoritesPage = () => {
   const favorites = useSelector(selectFavorites);
 
   return (
     <div className={styles.favoritesContainer}>
-      <title>Favorites</title>
+      <SEO
+        title="Favorites"
+        description="Discover the best camper rentals in Ukraine for your next adventure."
+      />
       <div className={styles.wrapper}>
         <VehicleList
           items={favorites}

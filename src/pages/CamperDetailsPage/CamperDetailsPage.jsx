@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { NavLink, Outlet } from "react-router-dom";
 import { Icons } from "../../components/Icons";
 import { fetchCamperById } from "../../redux/campers/operations";
-
+import SEO from "../../components/SEO/SEO";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import DatePicker from "react-datepicker";
@@ -63,7 +63,10 @@ const CamperDetailsPage = () => {
 
   return (
     <>
-      <title>{camper.name}</title>
+      <SEO
+        title={camper.name}
+        description="Discover the best camper rentals in Ukraine for your next adventure."
+      />
       <main className={styles.container}>
         {/* header */}
         <section className={styles.header}>

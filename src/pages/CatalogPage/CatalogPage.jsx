@@ -15,7 +15,6 @@ const CatalogPage = () => {
         title="Catalog"
         description="Discover the best camper rentals in Ukraine for your next adventure."
       />
-      {/* <title>Catalog</title> */}
       <h1 className={styles.visuallyHidden}>Campers catalog page</h1>
       <main className={styles.container}>
         <FilterSidebar />
