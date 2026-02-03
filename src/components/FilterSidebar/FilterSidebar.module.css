@@ -93,15 +93,17 @@
   padding: 0;
 }
 
-.filterItem:hover,
-.filterItem:active {
-  border-color: var(--button);
-  background-color: transparent;
-  outline: none;
+@media (hover: hover) {
+  .filterItem:hover {
+    border-color: var(--button);
+    background-color: transparent;
+    outline: none;
+  }
 }
 
 .filterItemActive {
   border-color: var(--button);
+  background-color: transparent;
   /* border-color: green !important; */
 }
 
