@@ -100,7 +100,7 @@
 }
 
 .filterItemActive {
-  border-color: var(--button) !important;
+  border-color: var(--button);
 }
 
 .searchBtn {
