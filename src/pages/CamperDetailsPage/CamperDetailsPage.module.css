@@ -35,7 +35,12 @@
 .price {
   font-size: 28px;
   font-weight: 600;
-  margin-bottom: 24px;
+}
+
+.priceWrapper {
+  display: flex;
+  /* align-items: center; */
+  gap: 10px;
 }
 
 .gallery {
@@ -156,6 +161,23 @@
   align-items: center;
   gap: 4px;
 }
+
+.favoriteBtn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: none;
+}
+
+.favoriteBtn:hover {
+  background-color: transparent;
+}
+
+
 
 
 .datepickerWrapper {

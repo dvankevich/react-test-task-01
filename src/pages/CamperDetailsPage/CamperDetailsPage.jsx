@@ -13,12 +13,16 @@ import { registerLocale } from "react-datepicker";
 import { enGB } from "date-fns/locale/en-GB";
 registerLocale("en-GB", enGB);
 import styles from "./CamperDetailsPage.module.css";
+import { selectFavorites } from "../../redux/selectors";
+import { toggleFavorite } from "../../redux/favorites/slice";
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const favorites = useSelector(selectFavorites);
 
   const camper = useSelector((state) => state.campers.currentCamper);
+  const isFavorite = favorites.some((fav) => fav.id === id);
   const isLoading = useSelector((state) => state.campers.isLoading);
 
   const [open, setOpen] = useState(false);
@@ -94,7 +98,22 @@ const CamperDetailsPage = () => {
               <span>{camper.location}</span>
             </div>
           </div>
-          <p className={styles.price}>€{camper.price.toFixed(2)}</p>
+          <div className={styles.priceWrapper}>
+            <span className={styles.price}>€{camper.price.toFixed(2)}</span>
+            <button
+              className={styles.favoriteBtn}
+              onClick={() => dispatch(toggleFavorite(camper))}
+              aria-label={
+                isFavorite ? "Remove from favorites" : "Add to favorites"
+              }
+            >
+              {isFavorite ? (
+                <Icons.HeartFill color="var(--button)" width="24" height="24" />
+              ) : (
+                <Icons.Heart color="var(--main)" width="24" height="24" />
+              )}
+            </button>
+          </div>
         </section>
 
         {/* gallery */}
