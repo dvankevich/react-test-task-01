@@ -4,6 +4,7 @@ import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectFavorites } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
 import { featureConfig } from "../../constants/features";
+import { Link } from "react-router-dom";
 
 const VehicleCard = ({ camper }) => {
   const dispatch = useDispatch();
@@ -46,17 +47,15 @@ const VehicleCard = ({ camper }) => {
         </div>
 
         <div className={styles.infoRow}>
-          <a
-            href={`/catalog/${camper.id}/reviews`}
-            target="_blank"
-            rel="noopener noreferrer"
+          <Link
+            to={`/catalog/${camper.id}/reviews`}
             aria-label={`View ${camper.reviews?.length} reviews`}
           >
             <span className={styles.rating}>
               <Icons.StarFull color="var(--rating)" aria-hidden="true" />
               {camper.rating}({camper.reviews?.length || 0} Reviews)
             </span>
-          </a>
+          </Link>
 
           <span className={styles.location}>
             <Icons.Map />
@@ -88,14 +87,9 @@ const VehicleCard = ({ camper }) => {
           })}
         </div>
 
-        <a
-          href={`/catalog/${camper.id}`}
-          className={styles.showMoreBtn}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <Link to={`/catalog/${camper.id}`} className={styles.showMoreBtn}>
           Show more
-        </a>
+        </Link>
       </div>
     </div>
   );
