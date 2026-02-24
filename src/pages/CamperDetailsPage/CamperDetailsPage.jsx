@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink, Outlet } from "react-router-dom";
+import { NavLink, Outlet, useLocation } from "react-router-dom";
 import { Icons } from "../../components/Icons";
 import { fetchCamperById } from "../../redux/campers/operations";
 import SEO from "../../components/SEO/SEO";
@@ -18,6 +18,7 @@ import { toggleFavorite } from "../../redux/favorites/slice";
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
+  const { pathname } = useLocation();
   const dispatch = useDispatch();
   const favorites = useSelector(selectFavorites);
 
@@ -140,6 +141,7 @@ const CamperDetailsPage = () => {
           <NavLink
             to="features"
             role="tab"
+            aria-selected={pathname.endsWith("/features")}
             className={({ isActive }) => (isActive ? styles.activeTab : "")}
           >
             Features
@@ -147,6 +149,7 @@ const CamperDetailsPage = () => {
           <NavLink
             to="reviews"
             role="tab"
+            aria-selected={pathname.endsWith("/reviews")}
             className={({ isActive }) => (isActive ? styles.activeTab : "")}
           >
             Reviews
