@@ -1,16 +1,17 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Icons } from "../Icons";
 import { toggleFavorite } from "../../redux/favorites/slice";
-import { selectFavorites } from "../../redux/selectors";
+import { selectIsFavorite } from "../../redux/selectors";
 import styles from "./VehicleCard.module.css";
 import { featureConfig } from "../../constants/features";
 import { Link } from "react-router-dom";
 
 const VehicleCard = ({ camper }) => {
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites);
+  //const favorites = useSelector(selectFavorites);
 
-  const isFavorite = favorites.some((fav) => fav.id === camper.id);
+  //const isFavorite = favorites.some((fav) => fav.id === camper.id);
+  const isFavorite = useSelector(selectIsFavorite(camper.id));
   const formattedPrice = `€${camper.price.toFixed(2)}`;
 
   const allFeatures = featureConfig;

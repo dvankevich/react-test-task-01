@@ -13,17 +13,18 @@ import { registerLocale } from "react-datepicker";
 import { enGB } from "date-fns/locale/en-GB";
 registerLocale("en-GB", enGB);
 import styles from "./CamperDetailsPage.module.css";
-import { selectFavorites } from "../../redux/selectors";
+import { selectIsFavorite } from "../../redux/selectors";
 import { toggleFavorite } from "../../redux/favorites/slice";
 
 const CamperDetailsPage = () => {
   const { id } = useParams();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  const favorites = useSelector(selectFavorites);
+  //const favorites = useSelector(selectFavorites);
 
   const camper = useSelector((state) => state.campers.currentCamper);
-  const isFavorite = favorites.some((fav) => fav.id === id);
+  //const isFavorite = favorites.some((fav) => fav.id === id);
+  const isFavorite = useSelector(selectIsFavorite(id));
   const isLoading = useSelector((state) => state.campers.isLoading);
 
   const [open, setOpen] = useState(false);
