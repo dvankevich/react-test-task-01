@@ -7,8 +7,8 @@ const CamperReviews = () => {
 
   return (
     <div className={styles.reviewsList}>
-      {camper.reviews.map((rev, i) => (
-        <div key={i} className={styles.reviewCard}>
+      {camper.reviews.map((rev) => (
+        <div key={rev.reviewer_name} className={styles.reviewCard}>
           <div className={styles.reviewHeader}>
             <div className={styles.avatar}>
               {rev.reviewer_name ? rev.reviewer_name[0] : "?"}

@@ -121,7 +121,7 @@ const CamperDetailsPage = () => {
         <section className={styles.gallery}>
           {camper.gallery.map((img, i) => (
             <div
-              key={i}
+              key={img.original}
               className={styles.imageThumb}
               onClick={() => {
                 setIndex(i);
