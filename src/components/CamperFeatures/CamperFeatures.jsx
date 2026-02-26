@@ -32,20 +32,20 @@ const CamperFeatures = () => {
         <li>
           <span>Form</span>{" "}
           <span className={styles.capitalize}>
-            {camper.form.replace(/([A-Z])/g, " $1")}
+            {camper.form.replaceAll(/([A-Z])/g, " $1")}
           </span>
         </li>
         <li>
-          <span>Length</span> <span>{parseFloat(camper.length)} m</span>
+          <span>Length</span> <span>{Number.parseFloat(camper.length)} m</span>
         </li>
         <li>
-          <span>Width</span> <span>{parseFloat(camper.width)} m</span>
+          <span>Width</span> <span>{Number.parseFloat(camper.width)} m</span>
         </li>
         <li>
-          <span>Height</span> <span>{parseFloat(camper.height)} m</span>
+          <span>Height</span> <span>{Number.parseFloat(camper.height)} m</span>
         </li>
         <li>
-          <span>Tank</span> <span>{parseFloat(camper.tank)} l</span>
+          <span>Tank</span> <span>{Number.parseFloat(camper.tank)} l</span>
         </li>
         <li>
           <span>Consumption</span> <span>{camper.consumption}</span>
