@@ -104,7 +104,6 @@
 .filterItemActive {
   border-color: var(--button);
   background-color: transparent;
-  /* border-color: green !important; */
 }
 
 .searchBtn {
