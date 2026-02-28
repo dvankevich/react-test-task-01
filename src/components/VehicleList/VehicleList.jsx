@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import PropTypes from "prop-types";
 import VehicleCard from "../VehicleCard/VehicleCard";
 import styles from "./VehicleList.module.css";
 
@@ -52,6 +53,17 @@ const VehicleList = ({
       )}
     </>
   );
+};
+
+VehicleList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired,
+  isLoading: PropTypes.bool,
+  emptyMessage: PropTypes.string,
+};
+
+VehicleList.defaultProps = {
+  isLoading: false,
+  emptyMessage: "No campers found 😢",
 };
 
 export default VehicleList;
