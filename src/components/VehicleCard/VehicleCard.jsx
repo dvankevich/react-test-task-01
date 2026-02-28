@@ -8,9 +8,6 @@ import { Link } from "react-router-dom";
 
 const VehicleCard = ({ camper }) => {
   const dispatch = useDispatch();
-  //const favorites = useSelector(selectFavorites);
-
-  //const isFavorite = favorites.some((fav) => fav.id === camper.id);
   const isFavorite = useSelector(selectIsFavorite(camper.id));
   const formattedPrice = `€${camper.price.toFixed(2)}`;
 
