@@ -16,12 +16,12 @@ const CamperReviews = () => {
             <div>
               <p className={styles.reviewerName}>{rev.reviewer_name}</p>
               <div className={styles.stars}>
-                {[...Array(5)].map((_, s) => (
+                {[1, 2, 3, 4, 5].map((star) => (
                   <Icons.StarFull
-                    key={s}
+                    key={star}
                     style={{
                       color:
-                        s < rev.reviewer_rating
+                        star <= rev.reviewer_rating
                           ? "var(--rating)"
                           : "var(--badges)",
                     }}
