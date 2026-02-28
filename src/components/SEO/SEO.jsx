@@ -1,3 +1,5 @@
+import PropTypes from "prop-types";
+
 const SEO = ({ title, description, image, url }) => {
   return (
     <head>
@@ -17,6 +19,20 @@ const SEO = ({ title, description, image, url }) => {
       <meta name="twitter:description" content={description} />
     </head>
   );
+};
+
+SEO.propTypes = {
+  title: PropTypes.string,
+  description: PropTypes.string,
+  image: PropTypes.string,
+  url: PropTypes.string,
+};
+
+SEO.defaultProps = {
+  title: "",
+  description: "",
+  image: null,
+  url: null,
 };
 
 export default SEO;
