@@ -18,10 +18,8 @@ const CamperDetailsPage = () => {
   const { id } = useParams();
   const { pathname } = useLocation();
   const dispatch = useDispatch();
-  //const favorites = useSelector(selectFavorites);
 
   const camper = useSelector((state) => state.campers.currentCamper);
-  //const isFavorite = favorites.some((fav) => fav.id === id);
   const isFavorite = useSelector(selectIsFavorite(id));
   const isLoading = useSelector((state) => state.campers.isLoading);
 
