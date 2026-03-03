@@ -50,6 +50,14 @@
 }
 
 .imageThumb {
+  /* reset default button appearance when used on <button> elements */
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  appearance: none;
+  -webkit-appearance: none;
+  /* existing sizing */
   flex-shrink: 0;
   width: 290px;
 }

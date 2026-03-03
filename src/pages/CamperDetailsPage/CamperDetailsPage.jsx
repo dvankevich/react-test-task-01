@@ -118,25 +118,18 @@ const CamperDetailsPage = () => {
         {/* gallery */}
         <section className={styles.gallery}>
           {camper.gallery.map((img, i) => (
-            <div
+            <button
               key={img.original}
               className={styles.imageThumb}
-              role="button"
-              tabIndex={0}
+              type="button"
               onClick={() => {
                 setIndex(i);
                 setOpen(true);
               }}
-              onKeyDown={(e) => {
-                if (e.key === "Enter" || e.key === " ") {
-                  setIndex(i);
-                  setOpen(true);
-                }
-              }}
               aria-label={`Open photo ${i + 1} of ${camper.name}`}
             >
               <img src={img.thumb} alt={`${camper.name} preview ${i + 1}`} />
-            </div>
+            </button>
           ))}
         </section>
 
