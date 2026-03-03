@@ -1,5 +1,6 @@
 # react-test-task-01
 [![React Doctor](https://www.react.doctor/share/badge?p=react-test-task-01&s=99&w=1&f=1)](https://www.react.doctor/share?p=react-test-task-01&s=99&w=1&f=1)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=dvankevich_react-test-task-01&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=dvankevich_react-test-task-01)
 
 ## Installation Instructions
 ```bash
