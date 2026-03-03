@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-const SEO = ({ title, description, image, url }) => {
+const Seo = ({ title, description, image, url }) => {
   return (
     <>
       <title>{title ? `${title} | TravelTrucks` : "TravelTrucks"}</title>
@@ -21,18 +21,18 @@ const SEO = ({ title, description, image, url }) => {
   );
 };
 
-SEO.propTypes = {
+Seo.propTypes = {
   title: PropTypes.string,
   description: PropTypes.string,
   image: PropTypes.string,
   url: PropTypes.string,
 };
 
-SEO.defaultProps = {
+Seo.defaultProps = {
   title: "",
   description: "",
   image: null,
   url: null,
 };
 
-export default SEO;
+export default Seo;

@@ -1,13 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./HomePage.module.css";
-import SEO from "../../components/SEO/SEO";
+import Seo from "../../components/SEO/SEO";
 
 const HomePage = () => {
   const navigate = useNavigate();
 
   return (
     <>
-      <SEO
+      <Seo
         title="Camper Rental Services"
         description="Discover the best camper rentals in Ukraine for your next adventure."
       />

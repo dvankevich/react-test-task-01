@@ -3,7 +3,7 @@ import { useParams, NavLink, Outlet, useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { Icons } from "../../components/Icons";
 import { fetchCamperById } from "../../redux/campers/operations";
-import SEO from "../../components/SEO/SEO";
+import Seo from "../../components/SEO/SEO";
 import Lightbox from "yet-another-react-lightbox";
 import "yet-another-react-lightbox/styles.css";
 import DatePicker, { registerLocale } from "react-datepicker";
@@ -66,7 +66,7 @@ const CamperDetailsPage = () => {
 
   return (
     <>
-      <SEO
+      <Seo
         title={camper.name}
         description="Discover the best camper rentals in Ukraine for your next adventure."
       />
