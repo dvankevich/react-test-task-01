@@ -48,7 +48,8 @@ const CamperDetailsPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Booking Data:", formData);
+    // submission logic would normally send data to a server;
+    // console.log removed to satisfy SonarQube rules against debug output
     alert("Thank you! Your booking request has been accepted.");
     setFormData({ name: "", email: "", bookingDate: "", comment: "" });
   };

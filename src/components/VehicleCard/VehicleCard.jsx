@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from "react-redux";
+import PropTypes from "prop-types";
 import { Icons } from "../Icons";
 import { toggleFavorite } from "../../redux/favorites/slice";
 import { selectIsFavorite } from "../../redux/selectors";
@@ -91,6 +92,24 @@ const VehicleCard = ({ camper }) => {
       </div>
     </div>
   );
+};
+
+VehicleCard.propTypes = {
+  camper: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired,
+    rating: PropTypes.number.isRequired,
+    location: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    gallery: PropTypes.arrayOf(
+      PropTypes.shape({
+        thumb: PropTypes.string,
+        original: PropTypes.string,
+      })
+    ),
+    reviews: PropTypes.array,
+  }).isRequired,
 };
 
 export default VehicleCard;

@@ -5,12 +5,11 @@ axios.defaults.baseURL = "https://66b1f8e71ca8ad33d4f5f63e.mockapi.io";
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchAll",
-  // thunkAPI must be second argument; disable default-param-last warning
-  // eslint-disable-next-line default-param-last
-  async (filters, thunkAPI) => {
+  // thunkAPI must be second argument; we can default the first param instead
+  async (filters = {}, thunkAPI) => {
     try {
       // normalize filters (default to empty object)
-      filters = filters || {};
+      // (filters already has a default value via parameter)
       // clear filters
       const params = Object.entries(filters).reduce((acc, [key, value]) => {
         if (value !== "" && value !== false && value !== null) {
