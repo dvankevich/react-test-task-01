@@ -1,7 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import { useEffect, Suspense, lazy } from "react";
-import { useDispatch } from "react-redux";
-import { fetchCampers } from "../redux/campers/operations";
+import { Suspense, lazy } from "react";
 import Header from "./Header/Header";
 import HomePage from "../pages/HomePage/HomePage";
 
@@ -17,12 +15,6 @@ const CamperFeatures = lazy(() => import("./CamperFeatures/CamperFeatures"));
 const CamperReviews = lazy(() => import("./CamperReviews/CamperReviews"));
 
 const App = () => {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(fetchCampers({}));
-  }, [dispatch]);
-
   return (
     <>
       <Header />
