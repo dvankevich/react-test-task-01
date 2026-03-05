@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Icons } from "../Icons";
 import { setFilter } from "../../redux/filters/slice";
 import { fetchCampers } from "../../redux/campers/operations";
-import { selectFilters } from "../../redux/selectors";
+import { selectFilters, selectIsLoading } from "../../redux/selectors";
 import LocationFilter from "../LocationFilter/LocationFilter";
 import styles from "./FilterSidebar.module.css";
 import { equipmentOptions } from "../../constants/features";
@@ -20,6 +20,7 @@ const typeOptions = [
 const FilterSidebar = () => {
   const dispatch = useDispatch();
   const filters = useSelector(selectFilters);
+  const isLoading = useSelector(selectIsLoading);
 
   const handleEquipmentToggle = (name) => {
     if (name === "transmission") {
