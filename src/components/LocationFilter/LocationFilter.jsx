@@ -3,7 +3,6 @@ import Select from "react-select";
 import { Icons } from "../Icons";
 import clsx from "clsx";
 import { setFilter } from "../../redux/filters/slice";
-import { fetchCampers } from "../../redux/campers/operations";
 import { selectFilters } from "../../redux/selectors";
 import styles from "./LocationFilter.module.css";
 
@@ -26,7 +25,6 @@ const LocationFilter = () => {
   const handleChange = (selectedOption) => {
     const value = selectedOption ? selectedOption.value : "";
     dispatch(setFilter({ location: value }));
-    dispatch(fetchCampers({ ...filters, location: value }));
   };
 
   return (
