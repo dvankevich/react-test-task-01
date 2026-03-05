@@ -98,7 +98,11 @@ const FilterSidebar = () => {
         </section>
       </div>
 
-      <button className={styles.searchBtn} onClick={onSearch}>
+      <button
+        className={styles.searchBtn}
+        onClick={onSearch}
+        disabled={isLoading}
+      >
         Search
       </button>
     </aside>
